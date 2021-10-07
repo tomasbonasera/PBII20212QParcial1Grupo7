@@ -1,21 +1,27 @@
 package Parcial_1;
 
-import enums.DistanciaPreferida;
+import enums.EstiloPreferido;
+import enums.TipoDeDeportista;
 
 public class Nadador extends Socio {
-	private DistanciaPreferida distanciaPreferida; 
+	private EstiloPreferido estiloPreferido; 
 
-	public Nadador(Integer nroSocio, String nombre, String apellido, DistanciaPreferida distanciaPreferida) {
+	public Nadador(Integer nroSocio, String nombre, String apellido, EstiloPreferido estiloPreferido) {
 		super(nroSocio, nombre, apellido);
-		this.setDistanciaPreferida(distanciaPreferida);
+		this.setEstiloPreferido(estiloPreferido);
 	}
 
-	public DistanciaPreferida getDistanciaPreferida() {
-		return distanciaPreferida;
+	public EstiloPreferido getEstiloPreferido() {
+		return estiloPreferido;
 	}
 
-	public void setDistanciaPreferida(DistanciaPreferida distanciaPreferida) {
-		this.distanciaPreferida = distanciaPreferida;
+	public void setEstiloPreferido(EstiloPreferido estiloPreferido) {
+		this.estiloPreferido = estiloPreferido;
+	}
+
+	@Override
+	public void setTipoDeDeportista() {
+		tipoDeDeportista = TipoDeDeportista.NADADOR;
 	}
 
 }

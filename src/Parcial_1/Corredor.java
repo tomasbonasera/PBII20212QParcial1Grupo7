@@ -1,6 +1,7 @@
 package Parcial_1;
 
 import enums.DistanciaPreferida;
+import enums.TipoDeDeportista;
 
 public class Corredor extends Socio {
 	private DistanciaPreferida distanciaPreferida;
@@ -8,6 +9,7 @@ public class Corredor extends Socio {
 	public Corredor(Integer nroSocio, String nombre, String apellido, DistanciaPreferida distanciaPreferida) {
 		super(nroSocio, nombre, apellido);
 		this.setTipoDeBicicleta(distanciaPreferida);
+		super.setTipoDeDeportista(TipoDeDeportista.CORREDOR);
 	}
 
 	public DistanciaPreferida getTipoDeBicicleta() {
@@ -18,5 +20,4 @@ public class Corredor extends Socio {
 		this.distanciaPreferida = distanciaPreferida;
 	}
 
-	
 }

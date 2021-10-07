@@ -1,11 +1,14 @@
 package Parcial_1;
 
+import enums.TipoDeDeportista;
+
 public abstract class Socio {
 	private Integer nroSocio;
 	private String nombre;
 	private String apellido;
+	private TipoDeDeportista tipoDeDeportista;
 
-	public Socio (Integer nroSocio, String nombre, String apellido) {
+	public Socio(Integer nroSocio, String nombre, String apellido) {
 		this.nroSocio = nroSocio;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -35,7 +38,7 @@ public abstract class Socio {
 		this.apellido = apellido;
 	}
 
-	//Cuando el nro de socio es el mismo significa que es la misma persona
+	// Cuando el nro de socio es el mismo significa que es la misma persona
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -60,6 +63,9 @@ public abstract class Socio {
 			return false;
 		return true;
 	}
-	
-	
+
+	public void setTipoDeDeportista(TipoDeDeportista deportista) {
+		this.tipoDeDeportista = deportista;
+	}
+
 }

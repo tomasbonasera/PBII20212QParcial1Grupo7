@@ -1,6 +1,4 @@
-package Parcial_1;
-
-import enums.TipoDeDeportista;
+package parcial1.pb2.tm.dominio;
 
 public abstract class Socio {
 	private Integer nroSocio;
@@ -67,5 +65,7 @@ public abstract class Socio {
 	public void setTipoDeDeportista(TipoDeDeportista deportista) {
 		this.tipoDeDeportista = deportista;
 	}
-
+	public TipoDeDeportista getTipoDeportista() {
+		return tipoDeDeportista;
+	}
 }

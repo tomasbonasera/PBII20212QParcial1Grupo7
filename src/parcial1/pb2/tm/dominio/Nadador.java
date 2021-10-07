@@ -1,14 +1,11 @@
-package Parcial_1;
-
-import enums.EstiloPreferido;
-import enums.TipoDeDeportista;
+package parcial1.pb2.tm.dominio;
 
 public class Nadador extends Socio {
 	private EstiloPreferido estiloPreferido;
 
 	public Nadador(Integer nroSocio, String nombre, String apellido, EstiloPreferido estiloPreferido) {
 		super(nroSocio, nombre, apellido);
-		this.setEstiloPreferido(estiloPreferido);
+		this.estiloPreferido=estiloPreferido;
 		super.setTipoDeDeportista(TipoDeDeportista.NADADOR);
 	}
 

@@ -1,6 +1,4 @@
-package Parcial_1;
-
-import enums.TipoDeCompetencia;
+package parcial1.pb2.tm.dominio;
 
 public class Evento {
 	private String nombre;

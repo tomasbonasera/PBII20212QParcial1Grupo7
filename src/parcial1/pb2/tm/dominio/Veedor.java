@@ -1,4 +1,4 @@
-package Parcial_1;
+package parcial1.pb2.tm.dominio;
 
 public class Veedor {
 	private Integer dni;

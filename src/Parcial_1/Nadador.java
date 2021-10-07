@@ -4,11 +4,12 @@ import enums.EstiloPreferido;
 import enums.TipoDeDeportista;
 
 public class Nadador extends Socio {
-	private EstiloPreferido estiloPreferido; 
+	private EstiloPreferido estiloPreferido;
 
 	public Nadador(Integer nroSocio, String nombre, String apellido, EstiloPreferido estiloPreferido) {
 		super(nroSocio, nombre, apellido);
 		this.setEstiloPreferido(estiloPreferido);
+		super.setTipoDeDeportista(TipoDeDeportista.NADADOR);
 	}
 
 	public EstiloPreferido getEstiloPreferido() {
@@ -17,11 +18,6 @@ public class Nadador extends Socio {
 
 	public void setEstiloPreferido(EstiloPreferido estiloPreferido) {
 		this.estiloPreferido = estiloPreferido;
-	}
-
-	@Override
-	public void setTipoDeDeportista() {
-		tipoDeDeportista = TipoDeDeportista.NADADOR;
 	}
 
 }

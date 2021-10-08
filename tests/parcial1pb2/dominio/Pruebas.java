@@ -16,11 +16,46 @@ public class Pruebas {
 	
 	@Test
 	public void queSePuedaCrearUnParticipanteEIngresarloAlEvento() {
+		//Prueba ciclismo + cliclista
 		Evento evento1 = new Evento("Evento de prueba", TipoDeCompetencia.CICLISMO, 10, 150);
 		Socio socio1 = new Ciclista("asd","123", "Juan", "Martinez", TipoDeBicicleta.RUTA);
 		assertNotNull(evento1);
 		assertNotNull(socio1);
 		assertTrue(evento1.anotarParticipante(socio1));
+		
+		//Prueba maraton + corredor
+		Evento evento2 = new Evento("Maraton 2 km", TipoDeCompetencia.RUNNING, 4, 5);
+		Socio socio2 = new Corredor("asd","123", "Juan", "Martinez", DistanciaPreferida.CINCO_KM);
+		assertTrue(evento2.anotarParticipante(socio2));
+		
+		//Prueba natacion + nadador
+		Evento evento3 = new Evento("Carrera 3", TipoDeCompetencia.NATACION, 4, 5);
+		Socio socio3 = new Nadador("asd1","123", "Juan", "Martinez", EstiloPreferido.CROLL);
+		assertTrue(evento3.anotarParticipante(socio3));
+		
+		//Prueba actuatlon = nadador + corredor
+		Evento evento4 = new Evento("Carrera 3", TipoDeCompetencia.ACUATLON, 4, 5);
+		Socio socio4 = new Corredor("asd","123", "Juan", "Martinez", DistanciaPreferida.CINCO_KM);
+		assertTrue(evento4.anotarParticipante(socio4));
+		Socio socio5 = new Nadador("asd1","123", "Juan", "Martinez", EstiloPreferido.CROLL);
+		assertTrue(evento4.anotarParticipante(socio5));
+		
+		//Prueba duatlon = corredor + ciclista
+		Evento evento5 = new Evento("Carrera 3", TipoDeCompetencia.DUATLON, 4, 5);
+		Socio socio6 = new Corredor("asd","123", "Juan", "Martinez", DistanciaPreferida.CINCO_KM);
+		assertTrue(evento5.anotarParticipante(socio6));
+		Socio socio7 = new Ciclista("asd","123", "Juan", "Martinez", TipoDeBicicleta.RUTA);
+		assertTrue(evento5.anotarParticipante(socio7));
+		
+		//Prueba triatlon = corredor + cliclista + nadador
+		Evento evento6 = new Evento("Juego olimpico", TipoDeCompetencia.TRIATLON, 4, 5);
+		Socio socio8 = new Corredor("asd","123", "Juan", "Martinez", DistanciaPreferida.CINCO_KM);
+		assertTrue(evento5.anotarParticipante(socio8));
+		Socio socio9 = new Ciclista("asd","123", "Juan", "Martinez", TipoDeBicicleta.RUTA);
+		assertTrue(evento5.anotarParticipante(socio9));
+		Socio socio10 = new Nadador("asd1","123", "Juan", "Martinez", EstiloPreferido.CROLL);
+		assertTrue(evento6.anotarParticipante(socio10));
+		
 	}
 	
 	@Test
@@ -59,16 +94,16 @@ public class Pruebas {
 	
 	@Test
 	public void queNoSePuedanAgregarMasParticipantesDeLosPermitidos() {
-		Evento evento1 = new Evento("Acuatrlon", TipoDeCompetencia.ACUATLON, 4, 100);
+		Evento evento1 = new Evento("1500 mts estilo libre", TipoDeCompetencia.NATACION, 4, 100);
 		Socio socio1 = new Nadador("asd1","123", "Juan", "Martinez", EstiloPreferido.CROLL);
 		Socio socio2 = new Nadador("asd2","1234", "Pedro", "Sanchez", EstiloPreferido.ESPALDA);
-		Socio socio3 = new Corredor("asd3","12345", "Sergio", "Gonzales", DistanciaPreferida.CINCO_KM);
-		Socio socio4 = new Corredor("asd4","123456", "Martin", "Juarez", DistanciaPreferida.CINCO_KM);
+		Socio socio3 = new Nadador("asd3","12345", "Sergio", "Gonzales", EstiloPreferido.MARIPOSA);
+		Socio socio4 = new Nadador("asd4","123456", "Martin", "Juarez", EstiloPreferido.PECHO);
 		assertTrue(evento1.anotarParticipante(socio1));
 		assertTrue(evento1.anotarParticipante(socio2));
 		assertTrue(evento1.anotarParticipante(socio3));
 		assertTrue(evento1.anotarParticipante(socio4));
-		Socio socio5 = new Corredor("asd5","1234567", "Socio5", "Socio5", DistanciaPreferida.CUARENTA_Y_DOS_KM);
+		Socio socio5 = new Nadador("asd5","1234567", "Socio5", "Socio5", EstiloPreferido.CROLL);
 		//Al solo poder anotarse 4 participantes, el 5to debería dar falso, dando verde el test general.
 		assertFalse(evento1.anotarParticipante(socio5));
 	}
@@ -89,6 +124,13 @@ public class Pruebas {
 		Veedor publico6 = new Veedor("asd5","12355", 123456789, "Maria", "Hernandez");
 		//Al solo poder anotarse 5 veedores, el 6to debería dar falso, dando verde el test general.
 		assertFalse(evento1.anotarVeedor(publico6));
+	}
+	
+	@Test
+	public void queNoPuedaIngresarUnDeportistaAUnaCompetenciaParaLaQueNoEstaPreparado() {
+		Evento evento1 = new Evento("Natacion 500 mts", TipoDeCompetencia.NATACION, 4, 5);
+		Socio socio1 = new Ciclista("asd","123", "Juan", "Martinez", TipoDeBicicleta.RUTA);
+		assertFalse(evento1.anotarParticipante(socio1));		
 	}
 
 }

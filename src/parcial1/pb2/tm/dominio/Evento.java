@@ -15,54 +15,66 @@ public class Evento {
 	
 	
 	public Boolean anotarParticipante(Socio deportistaParticipante) {
-		for(int i=0; i<participantes.length; i++) {
-			if(buscarParticipante(deportistaParticipante)==null) {
+		Boolean rt=false;
+		if(buscarParticipantePorNumeroDeSocio(deportistaParticipante.getNroSocio())==null) {	
+			for(int i=0; i<participantes.length; i++) {
 				if(participantes[i]==null) {
 					participantes[i]=deportistaParticipante;
-					return true;
+					rt=true;
+					break;
 				}
 			}
-		}return false;
+		}
+		return rt;
 	}
 	
 	public Boolean removerParticipante(Socio deportistaParticipante) {
+		Boolean rt=false;
 		for(int i=0; i<participantes.length; i++) {
 			if(participantes[i].getNroSocio().equals(deportistaParticipante.getNroSocio())) {
 				participantes[i]=null;
-				return true;
+				rt=true;
+				break;
 			}
-		}return false;
+		}return rt;
 	}
 	
 	public Boolean anotarVeedor(Veedor personaAIngresar) {
-		for(int i=0; i<publico.length; i++) {
-			if(buscarVeedor(personaAIngresar)==null) {
+		Boolean rt=false;
+		if(buscarVeedor(personaAIngresar)==null) {
+			for(int i=0; i<publico.length; i++) {
 				if(publico[i]==null) {
 					publico[i]=personaAIngresar;
-					return true;
+					rt=true;
+					break;
 				}
 			}
-		}return false;
+		}
+		return rt;
 	}
 
-	public Socio buscarParticipante(Socio participanteABuscar) {
+	public Socio buscarParticipantePorNumeroDeSocio(Integer nmroSocioABuscar) {
+		Socio participanteEncontrado=null;
 		for(int i=0; i<participantes.length; i++) {
 			if(participantes[i]!=null) {
-				if(participantes[i].getNroSocio().equals(participanteABuscar.getNroSocio())) {
-					return participantes[i];
+				if(participantes[i].getNroSocio().equals(nmroSocioABuscar)) {
+					participanteEncontrado=participantes[i];
+					break;
 				}
 			}
-		}return null;
+		}return participanteEncontrado;
 	}
 	
 	public Veedor buscarVeedor(Veedor veedorABuscar) {
+		Veedor veedorencontrado=null;
 		for(int i=0; i<publico.length; i++) {
 			if(publico[i]!=null) {
 				if(publico[i].getDni().equals(veedorABuscar.getDni()) && publico[i].getNroEntrada().equals(veedorABuscar.getNroEntrada())) {
-					return publico[i];
+					veedorencontrado=publico[i];
+					break;
 				}
 			}
-		}return null;
+		}return veedorencontrado;
 	}
 
 	public String getNombre() {

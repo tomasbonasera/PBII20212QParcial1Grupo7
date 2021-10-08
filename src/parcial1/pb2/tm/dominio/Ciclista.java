@@ -6,8 +6,9 @@ import enums.parcial1.pb2.tm.dominio.TipoDeDeportista;
 public class Ciclista extends Socio {
 	private TipoDeBicicleta tipoDeBicicleta;
 
-	public Ciclista(Integer nroSocio, String nombre, String apellido, TipoDeBicicleta tipoDeBicicleta) {
-		super(nroSocio, nombre, apellido);
+	public Ciclista(Integer nroSocio, String nombre, String apellido, String usuario, String contraseña,
+			TipoDeBicicleta tipoDeBicicleta) {
+		super(nroSocio, nombre, apellido, usuario, contraseña);
 		this.tipoDeBicicleta = tipoDeBicicleta;
 		setTipoDeDeportista(TipoDeDeportista.CICLISTA);
 	}

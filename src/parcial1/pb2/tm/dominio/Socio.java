@@ -2,16 +2,20 @@ package src.parcial1.pb2.tm.dominio;
 
 import enums.parcial1.pb2.tm.dominio.TipoDeDeportista;
 
-public abstract class Socio {
+public class Socio {
 	private Integer nroSocio;
 	private String nombre;
 	private String apellido;
+	private String usuario;
+	private String contraseña;
 	private TipoDeDeportista tipoDeDeportista;
 
-	public Socio(Integer nroSocio, String nombre, String apellido) {
+	public Socio(Integer nroSocio, String nombre, String apellido, String usuario, String contraseña) {
 		this.nroSocio = nroSocio;
 		this.nombre = nombre;
 		this.apellido = apellido;
+		this.usuario = usuario;
+		this.contraseña = contraseña;
 	}
 
 	public Integer getNroSocio() {

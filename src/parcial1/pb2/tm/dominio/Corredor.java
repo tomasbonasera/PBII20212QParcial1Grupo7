@@ -7,8 +7,9 @@ import enums.parcial1.pb2.tm.dominio.TipoDeDeportista;
 public class Corredor extends Socio {
 	private DistanciaPreferida distanciaPreferida;
 
-	public Corredor(Integer nroSocio, String nombre, String apellido, DistanciaPreferida distanciaPreferida) {
-		super(nroSocio, nombre, apellido);
+	public Corredor(Integer nroSocio, String nombre, String apellido, String usuario, String contraseña,
+			DistanciaPreferida distanciaPreferida) {
+		super(nroSocio, nombre, apellido, usuario, contraseña);
 
 		super.setTipoDeDeportista(TipoDeDeportista.CORREDOR);
 		this.distanciaPreferida = distanciaPreferida;

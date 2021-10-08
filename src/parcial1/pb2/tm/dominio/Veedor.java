@@ -5,11 +5,15 @@ public class Veedor {
 	private String nombre;
 	private String apellido;
 	private Integer nroEntrada;
+	private String usuario;
+	private String contraseña;
 
-	public Veedor(Integer dni, String nombre, String apellido) {
+	public Veedor(Integer dni, String nombre, String apellido, String usuario, String contraseña) {
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;
+		this.usuario = usuario;
+		this.contraseña = contraseña;
 	}
 
 	public Integer getNroEntrada() {

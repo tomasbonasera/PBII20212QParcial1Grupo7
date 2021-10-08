@@ -6,6 +6,7 @@ public class Ciclista extends Socio {
 	public Ciclista(String usuario,String contrasena, String nombre, String apellido, TipoDeBicicleta tipoDeBicicleta) {
 		super(nombre, apellido);
 		this.tipoDeBicicleta=tipoDeBicicleta;
+		setTipoDeDeportista(TipoDeDeportista.CICLISTA);
 		setUsuario(usuario);
 		setContrasena(contrasena);
 		

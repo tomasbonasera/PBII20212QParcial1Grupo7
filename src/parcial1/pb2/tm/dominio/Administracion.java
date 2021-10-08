@@ -4,11 +4,11 @@ public class Administracion {
 
 	private Socio[] participantes;
 	private String usuario;
-	private String contraseña;
+	private String contrasenia;
 
 	public Administracion() {
 		this.usuario = "administrador";
-		this.contraseña = "1234";
+		this.contrasenia = "1234";
 		participantes = new Socio[1000];
 	}
 
@@ -22,9 +22,9 @@ public class Administracion {
 		return false;
 	}
 
-	public Boolean VerificarIngreso(String usuario, String contraseña) {
+	public Boolean VerificarIngreso(String usuario, String contrasenia) {
 		Boolean verificar = false;
-		if (usuario == this.usuario && contraseña == this.contraseña) {
+		if (usuario == this.usuario && contrasenia == this.contrasenia) {
 			verificar = true;
 		}
 		return verificar;

@@ -6,9 +6,8 @@ import enums.parcial1.pb2.tm.dominio.TipoDeDeportista;
 public class Nadador extends Socio {
 	private EstiloPreferido estiloPreferido;
 
-	public Nadador(Integer nroSocio, String nombre, String apellido, String usuario, String contraseña,
-			EstiloPreferido estiloPreferido) {
-		super(nroSocio, nombre, apellido, usuario, contraseña);
+	public Nadador(String nombre, String apellido, String usuario, String contraseña, EstiloPreferido estiloPreferido) {
+		super(nombre, apellido, usuario, contraseña);
 		this.estiloPreferido = estiloPreferido;
 		super.setTipoDeDeportista(TipoDeDeportista.NADADOR);
 	}

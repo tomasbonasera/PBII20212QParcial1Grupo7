@@ -8,6 +8,14 @@ public class Socio {
 	private String apellido;
 	private String usuario;
 
+	public Socio(String nombre, String apellido, String usuario, String contraseña) {
+		this.nroSocio++;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.usuario = usuario;
+		this.contraseña = contraseña;
+	}
+
 	public String getUsuario() {
 		return usuario;
 	}
@@ -26,14 +34,6 @@ public class Socio {
 
 	private String contraseña;
 	private TipoDeDeportista tipoDeDeportista;
-
-	public Socio(Integer nroSocio, String nombre, String apellido, String usuario, String contraseña) {
-		this.nroSocio = nroSocio;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.usuario = usuario;
-		this.contraseña = contraseña;
-	}
 
 	public Integer getNroSocio() {
 		return nroSocio;

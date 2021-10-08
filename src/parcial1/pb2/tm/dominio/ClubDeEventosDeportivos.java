@@ -63,9 +63,9 @@ public class ClubDeEventosDeportivos {
 				System.out.println("Ingrese nombre de usuario:");
 				String usuarioIngresado = teclado.next();
 				System.out.println("Ingrese contraseña:");
-				String contraseñaIngresada = teclado.next();
+				String contraseniaIngresada = teclado.next();
 
-				Boolean ingreso = administrador.VerificarIngreso(usuarioIngresado, contraseñaIngresada);
+				Boolean ingreso = administrador.VerificarIngreso(usuarioIngresado, contraseniaIngresada);
 				if (ingreso == true) {
 					System.out.println("se ha ingresado correctamente");
 				} else {
@@ -102,7 +102,7 @@ public class ClubDeEventosDeportivos {
 			System.out.println("c. Peccho");
 			System.out.println("d. Mariposa");
 			Character dato1 = teclado.next().charAt(0);
-			Socio nuevoSocioNadador = new Nadador(opcion3, nombre, apellido, usuario, contraseña, estilo(dato1));
+			Socio nuevoSocioNadador = new Nadador(nombre, apellido, usuario, contraseña, estilo(dato1));
 			Boolean registro = administrador.realizarRegistroDeUsuario(nuevoSocioNadador);
 			if (registro == true) {
 				System.out.println("se ha registrado correctamente");
@@ -124,7 +124,7 @@ public class ClubDeEventosDeportivos {
 			System.out.println("b. 10 KM");
 			System.out.println("c. 42 KM");
 			Character dato2 = teclado.next().charAt(0);
-			Socio nuevoSocioCorredor = new Corredor(opcion3, nombre, apellido, usuario, contraseña, distancia(dato2));
+			Socio nuevoSocioCorredor = new Corredor(nombre, apellido, usuario, contraseña, distancia(dato2));
 			registro = administrador.realizarRegistroDeUsuario(nuevoSocioCorredor);
 			if (registro == true) {
 				System.out.println("se ha registrado correctamente");
@@ -148,8 +148,7 @@ public class ClubDeEventosDeportivos {
 			System.out.println("b. Ruta");
 			System.out.println("c. Triatlon");
 			Character dato3 = teclado.next().charAt(0);
-			Socio nuevoSocioCiclista = new Ciclista(opcion3, nombre, apellido, usuario, contraseña,
-					tipoBicicleta(dato3));
+			Socio nuevoSocioCiclista = new Ciclista(nombre, apellido, usuario, contraseña, tipoBicicleta(dato3));
 			registro = administrador.realizarRegistroDeUsuario(nuevoSocioCiclista);
 			if (registro == true) {
 				System.out.println("se ha registrado correctamente");

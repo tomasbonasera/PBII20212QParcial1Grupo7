@@ -25,7 +25,7 @@ public class Pruebas {
 	@Test
 	public void queSePuedaCrearUnParticipanteEIngresarloAlEvento() {
 		Evento evento1 = new Evento("Evento de prueba", TipoDeCompetencia.CICLISMO, 10, 150);
-		Socio socio1 = new Ciclista(1234, "Juan", "Martinez", "a", "a", TipoDeBicicleta.RUTA);
+		Socio socio1 = new Ciclista("Juan", "Martinez", "a", "a", TipoDeBicicleta.RUTA);
 		assertNotNull(evento1);
 		assertNotNull(socio1);
 		assertTrue(evento1.anotarParticipante(socio1));
@@ -34,7 +34,7 @@ public class Pruebas {
 	@Test
 	public void queSePuedaRemoverUnParticipanteIngresado() {
 		Evento evento1 = new Evento("Evento de prueba", TipoDeCompetencia.CICLISMO, 10, 150);
-		Socio socio1 = new Ciclista(1234, "Juan", "Martinez", "a", "a", TipoDeBicicleta.RUTA);
+		Socio socio1 = new Ciclista("Juan", "Martinez", "a", "a", TipoDeBicicleta.RUTA);
 		evento1.anotarParticipante(socio1);
 		assertTrue(evento1.removerParticipante(socio1));
 	}

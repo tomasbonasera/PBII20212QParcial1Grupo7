@@ -52,6 +52,16 @@ public class Evento {
 		}
 		return rt;
 	}
+	
+	public Boolean removerVeedor (Veedor personaARetirar) {
+		for(int i=0; i<publico.length; i++) {
+			if(publico[i].getDni().equals(personaARetirar.getDni())) {
+				publico[i]=null;
+				return true;
+			}
+		}
+		return false;
+	}
 
 	public Socio buscarParticipantePorNumeroDeSocio(Integer nmroSocioABuscar) {
 		Socio participanteEncontrado=null;
@@ -69,7 +79,7 @@ public class Evento {
 		Veedor veedorencontrado=null;
 		for(int i=0; i<publico.length; i++) {
 			if(publico[i]!=null) {
-				if(publico[i].getDni().equals(veedorABuscar.getDni()) && publico[i].getNroEntrada().equals(veedorABuscar.getNroEntrada())) {
+				if(publico[i].getDni().equals(veedorABuscar.getDni())) {
 					veedorencontrado=publico[i];
 					break;
 				}

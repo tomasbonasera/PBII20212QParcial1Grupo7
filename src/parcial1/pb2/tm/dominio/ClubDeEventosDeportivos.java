@@ -9,6 +9,7 @@ import enums.parcial1.pb2.tm.dominio.TipoDeBicicleta;
 public class ClubDeEventosDeportivos {
 
 	public static Scanner teclado = new Scanner(System.in);
+	public static Administracion administrador = new Administracion();
 	public static Boolean bucle1 = true;
 	public static Boolean bucle2 = true;
 	public static Boolean bucle3 = true;
@@ -16,7 +17,7 @@ public class ClubDeEventosDeportivos {
 	public static void main(String[] args) {
 
 		System.out.println("Bienvenidos al Club\n");
-		Administrador administrador = new Administrador();
+
 		do {
 			primerMenu();
 		} while (bucle1);
@@ -24,49 +25,58 @@ public class ClubDeEventosDeportivos {
 	}
 
 	public static void primerMenu() {
-		System.out.println("****************");
-		System.out.println("(1) Registrarse");
-		System.out.println("(2) Ingresar");
-		System.out.println("****************");
-		Integer opciones1 = teclado.nextInt();
+		do {
+			System.out.println("****************");
+			System.out.println("(1) Registrarse");
+			System.out.println("(2) Ingresar");
+			System.out.println("****************");
+			Integer opciones1 = teclado.nextInt();
 
-		switch (opciones1) {
-		case 1:
-			bucle1 = false;
-			do {
-				System.out.println("Registrarse como...");
-				System.out.println("1) Deportista");
-				System.out.println("2) Veedor");
-				Integer opciones2 = teclado.nextInt();
-				switch (opciones2) {
-				case 1:
-					do {
+			switch (opciones1) {
+			case 1:
+				do {
+					System.out.println("Registrarse como...");
+					System.out.println("1) Deportista");
+					System.out.println("2) Veedor");
+					Integer opciones2 = teclado.nextInt();
+					switch (opciones2) {
+					case 1:
+						bucle2 = false;
 						menuDeportista1();
-					} while (bucle3);
 
-					break;
+						break;
 
-				case 2:
+					case 2:
+						bucle2 = false;
+						menuVeedor();
 
-					menuVeedor();
-					break;
-				default:
-					System.out.println("opcion incorrecta");
-					break;
+						break;
+
+					default:
+						System.out.println("opcion incorrecta");
+						break;
+					}
+				} while (bucle2);
+				break;
+
+			case 2:
+				System.out.println("Ingrese nombre de usuario:");
+				String usuarioIngresado = teclado.next();
+				System.out.println("Ingrese contraseña:");
+				String contraseñaIngresada = teclado.next();
+
+				Boolean ingreso = administrador.VerificarIngreso(usuarioIngresado, contraseñaIngresada);
+				if (ingreso == true) {
+					System.out.println("se ha ingresado correctamente");
+				} else {
+					System.out.println("ocurrio un error");
 				}
-			} while (bucle2);
-
-		case 2:
-			bucle1 = false;
-			System.out.println("Ingrese nombre de usuario:");
-			String usuarioIngresado = teclado.next();
-			System.out.println("Ingrese contraseña:");
-			String contraseñaIngresada = teclado.next();
-			break;
-		default:
-			System.out.println("opcion incorrcta");
-			break;
-		}
+				break;
+			default:
+				System.out.println("opcion incorrcta");
+				break;
+			}
+		} while (bucle1);
 	}
 
 	public static void menuDeportista1() {
@@ -93,8 +103,12 @@ public class ClubDeEventosDeportivos {
 			System.out.println("d. Mariposa");
 			Character dato1 = teclado.next().charAt(0);
 			Socio nuevoSocioNadador = new Nadador(opcion3, nombre, apellido, usuario, contraseña, estilo(dato1));
-			bucle1 = true;
-			bucle2 = true;
+			Boolean registro = administrador.realizarRegistroDeUsuario(nuevoSocioNadador);
+			if (registro == true) {
+				System.out.println("se ha registrado correctamente");
+			} else {
+				System.out.println("ocurrio un error");
+			}
 			break;
 		case 2:
 			System.out.println("\nIngrese su nombre:");
@@ -111,8 +125,12 @@ public class ClubDeEventosDeportivos {
 			System.out.println("c. 42 KM");
 			Character dato2 = teclado.next().charAt(0);
 			Socio nuevoSocioCorredor = new Corredor(opcion3, nombre, apellido, usuario, contraseña, distancia(dato2));
-			bucle1 = true;
-			bucle2 = true;
+			registro = administrador.realizarRegistroDeUsuario(nuevoSocioCorredor);
+			if (registro == true) {
+				System.out.println("se ha registrado correctamente");
+			} else {
+				System.out.println("ocurrio un error");
+			}
 			bucle3 = false;
 			break;
 		case 3:
@@ -132,8 +150,12 @@ public class ClubDeEventosDeportivos {
 			Character dato3 = teclado.next().charAt(0);
 			Socio nuevoSocioCiclista = new Ciclista(opcion3, nombre, apellido, usuario, contraseña,
 					tipoBicicleta(dato3));
-			bucle1 = true;
-			bucle2 = true;
+			registro = administrador.realizarRegistroDeUsuario(nuevoSocioCiclista);
+			if (registro == true) {
+				System.out.println("se ha registrado correctamente");
+			} else {
+				System.out.println("ocurrio un error");
+			}
 			break;
 		default:
 			System.out.println("opcion incorrecta");
@@ -207,10 +229,7 @@ public class ClubDeEventosDeportivos {
 		String usuario = teclado.next();
 		System.out.println("Ingrese una contraseña:");
 		String contraseña = teclado.next();
-		teclado.next();
 		Veedor nuevoVeedor = new Veedor(dni, nombre, apellido, usuario, contraseña);
-		bucle1 = true;
-		bucle2 = true;
 	}
 
 }

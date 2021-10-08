@@ -7,6 +7,23 @@ public class Socio {
 	private String nombre;
 	private String apellido;
 	private String usuario;
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getContraseña() {
+		return contraseña;
+	}
+
+	public void setContraseña(String contraseña) {
+		this.contraseña = contraseña;
+	}
+
 	private String contraseña;
 	private TipoDeDeportista tipoDeDeportista;
 

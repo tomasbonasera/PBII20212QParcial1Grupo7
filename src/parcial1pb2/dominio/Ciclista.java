@@ -3,9 +3,11 @@ package parcial1pb2.dominio;
 public class Ciclista extends Socio {
 	private TipoDeBicicleta tipoDeBicicleta;
 
-	public Ciclista(Integer nroSocio, String nombre, String apellido, TipoDeBicicleta tipoDeBicicleta) {
-		super(nroSocio, nombre, apellido);
+	public Ciclista(String usuario,String contrasena, String nombre, String apellido, TipoDeBicicleta tipoDeBicicleta) {
+		super(nombre, apellido);
 		this.tipoDeBicicleta=tipoDeBicicleta;
+		setUsuario(usuario);
+		setContrasena(contrasena);
 		
 	}
 

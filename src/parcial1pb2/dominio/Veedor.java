@@ -1,15 +1,20 @@
 package parcial1pb2.dominio;
 
-public class Veedor {
+public class Veedor extends Usuario {
 	private Integer dni;
 	private String nombre;
 	private String apellido;
 	private Integer nroEntrada;
+	
 
-	public Veedor(Integer dni, String nombre, String apellido) {
+	public Veedor(String usuario, String contrasena, Integer dni, String nombre, String apellido) {
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;
+		setTipo(TipoUsuario.VEEDOR);
+		setUsuario(usuario);
+		setContrasena(contrasena);
+	
 	}
 
 	public Integer getNroEntrada() {

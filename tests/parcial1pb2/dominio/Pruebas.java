@@ -1,15 +1,9 @@
-package Tests;
+package parcial1pb2.dominio;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import Parcial_1.Ciclista;
-import Parcial_1.Evento;
-import Parcial_1.Socio;
-import Parcial_1.Veedor;
-import enums.TipoDeBicicleta;
-import enums.TipoDeCompetencia;
 
 public class Pruebas {
 

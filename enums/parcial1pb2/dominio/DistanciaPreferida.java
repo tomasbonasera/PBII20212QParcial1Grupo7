@@ -1,4 +1,4 @@
-package enums;
+package parcial1pb2.dominio;
 
 public enum DistanciaPreferida {
 CINCO_KM,

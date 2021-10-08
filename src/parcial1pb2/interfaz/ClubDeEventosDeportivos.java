@@ -1,4 +1,4 @@
-package Parcial_1;
+package parcial1pb2.interfaz;
 
 import java.util.Scanner;
 

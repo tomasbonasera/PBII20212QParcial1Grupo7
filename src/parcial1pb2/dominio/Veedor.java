@@ -1,20 +1,21 @@
 package parcial1pb2.dominio;
 
 public class Veedor extends Usuario {
+
 	private Integer dni;
 	private String nombre;
 	private String apellido;
 	private Integer nroEntrada;
-	
 
-	public Veedor(String usuario, String contrasena, Integer dni, String nombre, String apellido) {
+	public Veedor(String usuario, String contrasena, Integer dni, String nombre, String apellido,
+			TipoUsuario tipoUsuario) {
+		super(usuario, contrasena, nombre, apellido, tipoUsuario);
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;
-		setTipo(TipoUsuario.VEEDOR);
 		setUsuario(usuario);
 		setContrasena(contrasena);
-	
+
 	}
 
 	public Integer getNroEntrada() {
@@ -37,7 +38,8 @@ public class Veedor extends Usuario {
 		return apellido;
 	}
 
-	//Cuando el DNI y el nro de entrada son iguales significa que es la misma persona
+	// Cuando el DNI y el nro de entrada son iguales significa que es la misma
+	// persona
 	@Override
 	public int hashCode() {
 		final int prime = 31;

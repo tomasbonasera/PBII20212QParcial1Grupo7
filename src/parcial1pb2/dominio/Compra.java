@@ -56,6 +56,7 @@ public class Compra {
 		}
 		return null;
 	}
+
 	public void imprimirTicket() {
 		for (int i = 0; i < entradas.length; i++) {
 			if(entradas[i]!=null) {
@@ -65,4 +66,5 @@ public class Compra {
 			}
 		}
 	}
+	
 }

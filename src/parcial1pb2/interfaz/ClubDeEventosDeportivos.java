@@ -4,7 +4,9 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 
+
 import parcial1pb2.dominio.*;
+
 
 public class ClubDeEventosDeportivos {
 
@@ -24,10 +26,13 @@ public class ClubDeEventosDeportivos {
 
 	}
 
+	// ---------------------REGISTRO-DEL-MENU------------------------------------------------------------
+
 	public static void primerMenu() {
 		System.out.println("****************");
 		System.out.println("(1) Registrarse");
-		System.out.println("(2) Ingresar");
+		System.out.println("(2) Ingresar"); // para ingresar como administrador ingresar
+											// Usuario: "admin" Contraseña:"2468"
 		System.out.println("****************\n");
 		Integer opciones1 = teclado.nextInt();
 
@@ -65,15 +70,17 @@ public class ClubDeEventosDeportivos {
 			String usuarioIngresado = teclado.next();
 			System.out.println("Ingrese contraseña:");
 			String contraseniaIngresada = teclado.next();
-			Boolean verificar = usuarioAdministrador.verificarIngresoDeUsuario(usuarioIngresado, contraseniaIngresada);
+			Boolean verificar = usuarioAdministrador.verificarIngresoDeUsuario(usuarioIngresado, contraseniaIngresada);			
 			if (verificar == true) {
 				System.out.println("se ha ingresado correctamente");
-				switch (usuarioAdministrador.buscarPorUsuarioYContrasena(usuarioIngresado, contraseniaIngresada).getTipo()) {
+				switch (usuarioAdministrador.buscarPorUsuarioYContrasena(usuarioIngresado, contraseniaIngresada)
+						.getTipo()) {
 				case ADMIN:
 					inMenuAdmin();
 					break;
 				case VEEDOR:
-					
+					inMenuVeedor(usuarioIngresado, contraseniaIngresada);
+
 					break;
 				case DEPORTISTA:
 					inMenuDeportista(usuarioIngresado, contraseniaIngresada);
@@ -91,6 +98,7 @@ public class ClubDeEventosDeportivos {
 			break;
 		}
 	}
+	// ---------------------INGRESO-AL-MENU------------------------------------------------------------
 //-----------------------------DEPORTISTA--------------------------------------
 	private static void inMenuDeportista(String usuario, String contrasena) {
 		Socio usuarioLogeado=(Socio) usuarioAdministrador.buscarPorUsuarioYContrasena(usuario, contrasena);
@@ -192,6 +200,7 @@ private static void agregarNuevoDeporte(Socio usuarioLogeado) {
 		}
 	}
 
+
 	public static void menuDeportista1() {
 		System.out.println("Registrarse como...");
 		System.out.println("1. Nadador");
@@ -216,7 +225,7 @@ private static void agregarNuevoDeporte(Socio usuarioLogeado) {
 			System.out.println("c. Peccho");
 			System.out.println("d. Mariposa");
 			Character dato1 = teclado.next().charAt(0);
-			if (usuarioAdministrador.verificarUsuarioRepetido(usuario)==false) {
+			if (usuarioAdministrador.verificarUsuarioRepetido(usuario) == false) {
 				Socio nuevoSocioNadador = new Nadador(usuario, contrasena, nombre, apellido, estilo(dato1),
 						TipoUsuario.DEPORTISTA);
 				nuevoSocioNadador.establecerDeportePrimario();
@@ -245,7 +254,7 @@ private static void agregarNuevoDeporte(Socio usuarioLogeado) {
 			System.out.println("c. 42 KM");
 			Character dato2 = teclado.next().charAt(0);
 
-			if (usuarioAdministrador.verificarUsuarioRepetido(usuario)==false) {
+			if (usuarioAdministrador.verificarUsuarioRepetido(usuario) == false) {
 				Socio nuevoSocioCorredor = new Corredor(usuario, contrasena, nombre, apellido, distancia(dato2),
 						TipoUsuario.DEPORTISTA);
 				nuevoSocioCorredor.establecerDeportePrimario();
@@ -276,7 +285,7 @@ private static void agregarNuevoDeporte(Socio usuarioLogeado) {
 			System.out.println("b. Ruta");
 			System.out.println("c. Triatlon");
 			Character dato3 = teclado.next().charAt(0);
-			if (usuarioAdministrador.verificarUsuarioRepetido(usuario)==false) {
+			if (usuarioAdministrador.verificarUsuarioRepetido(usuario) == false) {
 				Socio nuevoSocioCiclista = new Ciclista(usuario, contrasena, nombre, apellido, tipoBicicleta(dato3),
 						TipoUsuario.DEPORTISTA);
 				nuevoSocioCiclista.establecerDeportePrimario();
@@ -362,34 +371,13 @@ private static void agregarNuevoDeporte(Socio usuarioLogeado) {
 		return eleccion;
 	}
 //--------------------------------------------------------------------------------------
-	public static void menuVeedor() {
-		System.out.println("\nIngrese su nombre:");
-		String nombre = teclado.next();
-		System.out.println("Ingrese su apellido:");
-		String apellido = teclado.next();
-		System.out.println("Ingrese su DNI:");
-		Integer dni = teclado.nextInt();
-		System.out.println("Ingrese un nombre de usuario:");
-		String usuario = teclado.next();
-		System.out.println("Ingrese una contraseña:");
-		String contraseña = teclado.next();
-		if (usuarioAdministrador.verificarUsuarioRepetido(usuario)==false) {
-			Veedor nuevoVeedor = new Veedor(usuario, contraseña, dni, nombre, apellido, TipoUsuario.VEEDOR);
-			Boolean verificar = usuarioAdministrador.agregarUsuarioRegistrado(nuevoVeedor);
-			if (verificar == true) {
-				System.out.println("se ha registrado correctamente");
-			} else {
-				System.out.println("ha ocurrido un error");
-			}
-		} else {
-			System.out.println("Usuario ya registrado. Use otro usuario para registrarse");
-		}
-		
 
-	}
-	//---------------------ADMIN------------------------------------------------------------
-	public static void inMenuAdmin(){
-		Integer opcion=0;
+
+
+
+	// ---------------------ADMIN------------------------------------------------------------
+	public static void inMenuAdmin() {
+		Integer opcion = 0;
 		do {
 			System.out.println("*************************************************");
 			System.out.println("(1) Crear evento");
@@ -404,7 +392,7 @@ private static void agregarNuevoDeporte(Socio usuarioLogeado) {
 			System.out.println("*************************************************\n");
 			opcion = teclado.nextInt();
 			switch (opcion) {
-			case 1:	
+			case 1:
 				crearEvento();
 				break;
 			case 2:
@@ -435,33 +423,36 @@ private static void agregarNuevoDeporte(Socio usuarioLogeado) {
 				System.out.println("Opción inválida");
 				break;
 			}
-		} while (opcion!=9);
-		
+		} while (opcion != 9);
+
 	}
 
 	private static void buscarParticipanteOVeedor() {
 		System.out.println("Ingrese el código del evento que desea ver");
-		Integer codigo=teclado.nextInt();
-		if (usuarioAdministrador.buscarEventoPorCodigo(codigo)!=null) {
+		Integer codigo = teclado.nextInt();
+		if (usuarioAdministrador.buscarEventoPorCodigo(codigo) != null) {
 			System.out.println("(1) Buscar participante");
 			System.out.println("(2) Buscar veedor");
-			Integer eleccion=teclado.nextInt();
+			Integer eleccion = teclado.nextInt();
 			switch (eleccion) {
 			case 1:
 				System.err.println("Ingrese el Número de socio del particpante a buscar");
-				Integer nroSocio=teclado.nextInt();
-				if (usuarioAdministrador.buscarEventoPorCodigo(codigo).buscarParticipantePorNumeroDeSocio(nroSocio)!=null) {
-					System.out.println(usuarioAdministrador.buscarEventoPorCodigo(codigo).buscarParticipantePorNumeroDeSocio(nroSocio).toString());
-				}else {
+				Integer nroSocio = teclado.nextInt();
+				if (usuarioAdministrador.buscarEventoPorCodigo(codigo)
+						.buscarParticipantePorNumeroDeSocio(nroSocio) != null) {
+					System.out.println(usuarioAdministrador.buscarEventoPorCodigo(codigo)
+							.buscarParticipantePorNumeroDeSocio(nroSocio).toString());
+				} else {
 					System.out.println("No se ha encontrado un participante con el número de socio ingresado");
 				}
 				break;
 			case 2:
 				System.out.println("Ingrese el DNI del veedor a buscar");
-				Integer dni=teclado.nextInt();
-				if (usuarioAdministrador.buscarEventoPorCodigo(codigo).buscarVeedorConDni(dni)!=null) {
-					System.out.println(usuarioAdministrador.buscarEventoPorCodigo(codigo).buscarVeedorConDni(dni).toString());
-				}else {
+				Integer dni = teclado.nextInt();
+				if (usuarioAdministrador.buscarEventoPorCodigo(codigo).buscarVeedorConDni(dni) != null) {
+					System.out.println(
+							usuarioAdministrador.buscarEventoPorCodigo(codigo).buscarVeedorConDni(dni).toString());
+				} else {
 					System.out.println("No se ha encontrado un veedor con el DNI ingresado");
 				}
 				break;
@@ -476,11 +467,11 @@ private static void agregarNuevoDeporte(Socio usuarioLogeado) {
 
 	private static void eliminarVeedor() {
 		System.out.println("Ingrese el código del evento que desea ver");
-		Integer codigo=teclado.nextInt();
-		if (usuarioAdministrador.buscarEventoPorCodigo(codigo)!=null) {
+		Integer codigo = teclado.nextInt();
+		if (usuarioAdministrador.buscarEventoPorCodigo(codigo) != null) {
 			System.out.println("Ingrese el Dni del veedor a elminar");
-			Integer nroDni=teclado.nextInt();
-			Boolean sePudoRemover=usuarioAdministrador.buscarEventoPorCodigo(codigo).removerVeedorConDni(nroDni);
+			Integer nroDni = teclado.nextInt();
+			Boolean sePudoRemover = usuarioAdministrador.buscarEventoPorCodigo(codigo).removerVeedorConDni(nroDni);
 			if (sePudoRemover) {
 				System.out.println("Se ha eliminado correctamente al veedor");
 			} else {
@@ -493,11 +484,12 @@ private static void agregarNuevoDeporte(Socio usuarioLogeado) {
 
 	private static void eliminarParticipante() {
 		System.out.println("Ingrese el código del evento que desea ver");
-		Integer codigo=teclado.nextInt();
-		if (usuarioAdministrador.buscarEventoPorCodigo(codigo)!=null) {
+		Integer codigo = teclado.nextInt();
+		if (usuarioAdministrador.buscarEventoPorCodigo(codigo) != null) {
 			System.out.println("Ingrese el número de socio del participante a elminar");
-			Integer nroSocio=teclado.nextInt();
-			Boolean sePudoRemover=usuarioAdministrador.buscarEventoPorCodigo(codigo).removerParticipanteConNroSocio(nroSocio);
+			Integer nroSocio = teclado.nextInt();
+			Boolean sePudoRemover = usuarioAdministrador.buscarEventoPorCodigo(codigo)
+					.removerParticipanteConNroSocio(nroSocio);
 			if (sePudoRemover) {
 				System.out.println("Se ha eliminado correctamente al participante");
 			} else {
@@ -510,15 +502,15 @@ private static void agregarNuevoDeporte(Socio usuarioLogeado) {
 
 	private static void verListaPublico() {
 		System.out.println("Ingrese el código del evento que desea ver");
-		Integer codigo=teclado.nextInt();
-		if (usuarioAdministrador.buscarEventoPorCodigo(codigo)!=null) {
-			Veedor[] publicoDelEvento=usuarioAdministrador.buscarEventoPorCodigo(codigo).getPublico();
-			System.out.println("Evento nro: "+codigo);
-			Boolean hayPublico=false;
+		Integer codigo = teclado.nextInt();
+		if (usuarioAdministrador.buscarEventoPorCodigo(codigo) != null) {
+			Veedor[] publicoDelEvento = usuarioAdministrador.buscarEventoPorCodigo(codigo).getPublico();
+			System.out.println("Evento nro: " + codigo);
+			Boolean hayPublico = false;
 			for (int i = 0; i < publicoDelEvento.length; i++) {
-				if (publicoDelEvento[i]!=null) {
+				if (publicoDelEvento[i] != null) {
 					System.out.println(publicoDelEvento[i].toString());
-					hayPublico=true;
+					hayPublico = true;
 				}
 			}
 			if (hayPublico=false) {
@@ -531,15 +523,15 @@ private static void agregarNuevoDeporte(Socio usuarioLogeado) {
 
 	private static void mostrarListaParticipantes() {
 		System.out.println("Ingrese el código del evento que desea ver");
-		Integer codigo=teclado.nextInt();
-		if (usuarioAdministrador.buscarEventoPorCodigo(codigo)!=null) {
-			Socio[] participantesDelEvento=usuarioAdministrador.buscarEventoPorCodigo(codigo).getParticipantes();
-			System.out.println("Evento nro: "+codigo);
-			Boolean hayParticipantes=false;
+		Integer codigo = teclado.nextInt();
+		if (usuarioAdministrador.buscarEventoPorCodigo(codigo) != null) {
+			Socio[] participantesDelEvento = usuarioAdministrador.buscarEventoPorCodigo(codigo).getParticipantes();
+			System.out.println("Evento nro: " + codigo);
+			Boolean hayParticipantes = false;
 			for (int i = 0; i < participantesDelEvento.length; i++) {
-				if (participantesDelEvento[i]!=null) {
+				if (participantesDelEvento[i] != null) {
 					System.out.println(participantesDelEvento[i].toString());
-					hayParticipantes=true;
+					hayParticipantes = true;
 				}
 			}
 			if (hayParticipantes=false) {
@@ -554,8 +546,10 @@ private static void agregarNuevoDeporte(Socio usuarioLogeado) {
 		if (usuarioAdministrador.obtenerCantidadDeEventosExistentes().equals(0)) {
 			System.out.println("No se encontraron eventos creados");
 		} else {
+
 			Boolean hayEventos=false;
 			Evento[] listaEventos=usuarioAdministrador.obtenerListaDeEventosExistentes();
+
 			for (int i = 0; i < listaEventos.length; i++) {
 				System.out.println(listaEventos[i].toString());
 				hayEventos=true;
@@ -568,7 +562,7 @@ private static void agregarNuevoDeporte(Socio usuarioLogeado) {
 
 	private static void eliminarEvento() {
 		System.out.println("Ingrese el código del evento que desea eliminar");
-		Integer codigo=teclado.nextInt();
+		Integer codigo = teclado.nextInt();
 		if (usuarioAdministrador.eliminarEvento(codigo)) {
 			System.out.println("Se ha eliminado el evento correctamente");
 		} else {
@@ -578,9 +572,9 @@ private static void agregarNuevoDeporte(Socio usuarioLogeado) {
 
 	private static void crearEvento() {
 		System.out.println("Ingrese el nombre del evento a crear");
-		String nombreEventoACrear=teclado.next();
-		char tipoCompetencia=' ';
-		Boolean bucleTipoCompetencia=true;			
+		String nombreEventoACrear = teclado.next();
+		char tipoCompetencia = ' ';
+		Boolean bucleTipoCompetencia = true;
 		do {
 			System.out.println("Seleccione el tipo de competición del evento");
 			System.out.println("(a) Acuatlon");
@@ -589,26 +583,28 @@ private static void agregarNuevoDeporte(Socio usuarioLogeado) {
 			System.out.println("(d) Natacion");
 			System.out.println("(e) Running");
 			System.out.println("(f) Triatlon");
-			tipoCompetencia=teclado.next().charAt(0);
-			if (tipoCompetencia(tipoCompetencia)!=null) {
-				bucleTipoCompetencia=false;
+			tipoCompetencia = teclado.next().charAt(0);
+			if (tipoCompetencia(tipoCompetencia) != null) {
+				bucleTipoCompetencia = false;
 			} else {
 				System.out.println("Opción inválida, vuelva a ingresar una opción");
 			}
 		} while (bucleTipoCompetencia);
 		System.out.println("Ingrese la cantidad de participantes/deportistas del evento");
-		Integer cantidadParticipantes=teclado.nextInt();
+		Integer cantidadParticipantes = teclado.nextInt();
 		System.out.println("Ingrese la cantidad de veedores del evento");
-		Integer cantidadVeedores=teclado.nextInt();
-		Evento eventoAAnadir=new Evento(nombreEventoACrear, tipoCompetencia(tipoCompetencia),cantidadParticipantes, cantidadVeedores);
-		Boolean seAgrego=usuarioAdministrador.agregarEvento(eventoAAnadir);
+		Integer cantidadVeedores = teclado.nextInt();
+		Evento eventoAAnadir = new Evento(nombreEventoACrear, tipoCompetencia(tipoCompetencia), cantidadParticipantes,
+				cantidadVeedores);
+		Boolean seAgrego = usuarioAdministrador.agregarEvento(eventoAAnadir);
 		if (seAgrego) {
 			System.out.println("Evento creado exitosamente!");
 		} else {
 			System.out.println("No se ha podido crear el evento");
 		}
 	}
-	//--------------------------------------------------------------------
+
+	// --------------------------------------------------------------------
 	public static TipoDeCompetencia tipoCompetencia(Character dato) {
 		TipoDeCompetencia eleccion = null;
 		switch (dato) {
@@ -658,4 +654,75 @@ private static void agregarNuevoDeporte(Socio usuarioLogeado) {
 
 		return eleccion;
 	}
+	
+	//----------------------VEEDOR-------------------------------
+    public static void inMenuVeedor(String usuarioIngresado, String contraseniaIngresada) {
+		Integer opcion=0;
+		do {
+			System.out.println("(1) Comprar entrada");
+			System.out.println("(2) Salir");
+			opcion =teclado.nextInt();
+			switch(opcion) {
+			case 1:
+				comprarEntrada(usuarioIngresado,contraseniaIngresada);
+				break;
+		
+			default:
+				System.out.println("Opcion invalida");
+			}
+		}while(opcion!=2);
+	}
+
+	public static void menuVeedor() {
+		System.out.println("\nIngrese su nombre:");
+		String nombre = teclado.next();
+		System.out.println("Ingrese su apellido:");
+		String apellido = teclado.next();
+		System.out.println("Ingrese su DNI:");
+		Integer dni = teclado.nextInt();
+		System.out.println("Ingrese un nombre de usuario:");
+		String usuario = teclado.next();
+		System.out.println("Ingrese una contraseña:");
+		String contraseña = teclado.next();
+		if (usuarioAdministrador.verificarUsuarioRepetido(usuario) == false) {
+			Veedor nuevoVeedor = new Veedor(usuario, contraseña, dni, nombre, apellido, TipoUsuario.VEEDOR);
+			Boolean verificar = usuarioAdministrador.agregarUsuarioRegistrado(nuevoVeedor);
+			if (verificar == true) {
+				System.out.println("se ha registrado correctamente");
+			} else {
+				System.out.println("ha ocurrido un error");
+			}
+		} else {
+			System.out.println("Usuario ya registrado. Use otro usuario para registrarse");
+		}
+
+	}
+
+	public static void comprarEntrada(String usuarioIngresado,String contraseniaIngresada ) {
+		System.out.println("\nIngrese numero de la entrada:");
+		Integer numero = teclado.nextInt();
+		System.out.println("\nIngrese precio de la entrada:");
+		Double precio = teclado.nextDouble();
+		System.out.println("\nIngrese cantidad de entradas:");
+		Integer cantidad = teclado.nextInt();
+		
+	    Entrada entrada = new Entrada(numero,precio,cantidad);		
+		Usuario buscado=usuarioAdministrador.buscarPorUsuarioYContrasena(usuarioIngresado, contraseniaIngresada);
+		String usuario =((Veedor)buscado).getUsuario(); 
+		String contraseña = ((Veedor)buscado).getContrasena();
+		Integer dni = ((Veedor)buscado).getDni();
+		String nombre =((Veedor)buscado).getNombre();
+		String apellido=((Veedor)buscado).getApellido();
+		TipoUsuario tipoUsuario=((Veedor)buscado).getTipo();
+		Veedor comprador = new Veedor(usuario, contraseña, dni, nombre, apellido, tipoUsuario);
+		Compra compra= new Compra();
+		compra.agregarVeedor(comprador);
+		compra.ingresarEntrada(entrada);
+		if(compra.realizarCompra(entrada, comprador)) {
+			System.out.println("Se ha realizado la compra");
+		}else {
+			System.out.println("No se ha podido realizar la compra");
+		}
+	}
+
 }

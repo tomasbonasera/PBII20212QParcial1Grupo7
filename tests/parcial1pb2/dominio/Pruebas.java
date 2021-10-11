@@ -21,6 +21,7 @@ public class Pruebas {
 		// Prueba ciclismo + cliclista
 		Evento evento1 = new Evento("Evento de prueba", TipoDeCompetencia.CICLISMO, 10, 150);
 		Socio socio1 = new Ciclista("asd", "123", "Juan", "Martinez", TipoDeBicicleta.RUTA, TipoUsuario.DEPORTISTA);
+		socio1.establecerDeportePrimario();
 		assertNotNull(evento1);
 		assertNotNull(socio1);
 		assertTrue(evento1.anotarParticipante(socio1));
@@ -29,37 +30,57 @@ public class Pruebas {
 		Evento evento2 = new Evento("Maraton 2 km", TipoDeCompetencia.RUNNING, 4, 5);
 		Socio socio2 = new Corredor("asd", "123", "Juan", "Martinez", DistanciaPreferida.CINCO_KM,
 				TipoUsuario.DEPORTISTA);
+		socio2.establecerDeportePrimario();
 		assertTrue(evento2.anotarParticipante(socio2));
 
 		// Prueba natacion + nadador
 		Evento evento3 = new Evento("Carrera 3", TipoDeCompetencia.NATACION, 4, 5);
 		Socio socio3 = new Nadador("asd1", "123", "Juan", "Martinez", EstiloPreferido.CROLL, TipoUsuario.DEPORTISTA);
+		socio3.establecerDeportePrimario();
 		assertTrue(evento3.anotarParticipante(socio3));
 
 		// Prueba actuatlon = nadador + corredor
 		Evento evento4 = new Evento("Carrera 3", TipoDeCompetencia.ACUATLON, 4, 5);
 		Socio socio4 = new Corredor("asd", "123", "Juan", "Martinez", DistanciaPreferida.CINCO_KM,
 				TipoUsuario.DEPORTISTA);
+		socio4.establecerDeportePrimario();
+		socio4.agregarDeporteQuePuedeRealizar(TipoDeDeportista.NADADOR);
 		assertTrue(evento4.anotarParticipante(socio4));
 		Socio socio5 = new Nadador("asd1", "123", "Juan", "Martinez", EstiloPreferido.CROLL, TipoUsuario.DEPORTISTA);
+		socio5.establecerDeportePrimario();
+		socio5.agregarDeporteQuePuedeRealizar(TipoDeDeportista.CORREDOR);
 		assertTrue(evento4.anotarParticipante(socio5));
 
 		// Prueba duatlon = corredor + ciclista
 		Evento evento5 = new Evento("Carrera 3", TipoDeCompetencia.DUATLON, 4, 5);
 		Socio socio6 = new Corredor("asd", "123", "Juan", "Martinez", DistanciaPreferida.CINCO_KM,
 				TipoUsuario.DEPORTISTA);
+		socio6.establecerDeportePrimario();
+		socio6.agregarDeporteQuePuedeRealizar(TipoDeDeportista.CICLISTA);
 		assertTrue(evento5.anotarParticipante(socio6));
 		Socio socio7 = new Ciclista("asd", "123", "Juan", "Martinez", TipoDeBicicleta.RUTA, TipoUsuario.DEPORTISTA);
+		socio7.establecerDeportePrimario();
+		socio7.agregarDeporteQuePuedeRealizar(TipoDeDeportista.CORREDOR);
 		assertTrue(evento5.anotarParticipante(socio7));
 
 		// Prueba triatlon = corredor + cliclista + nadador
 		Evento evento6 = new Evento("Juego olimpico", TipoDeCompetencia.TRIATLON, 4, 5);
 		Socio socio8 = new Corredor("asd", "123", "Juan", "Martinez", DistanciaPreferida.CINCO_KM,
 				TipoUsuario.DEPORTISTA);
+		socio8.establecerDeportePrimario();
+		socio8.agregarDeporteQuePuedeRealizar(TipoDeDeportista.NADADOR);
+		socio8.agregarDeporteQuePuedeRealizar(TipoDeDeportista.CICLISTA);
+
 		assertTrue(evento5.anotarParticipante(socio8));
 		Socio socio9 = new Ciclista("asd", "123", "Juan", "Martinez", TipoDeBicicleta.RUTA, TipoUsuario.DEPORTISTA);
+		socio9.establecerDeportePrimario();
+		socio9.agregarDeporteQuePuedeRealizar(TipoDeDeportista.NADADOR);
+		socio9.agregarDeporteQuePuedeRealizar(TipoDeDeportista.CORREDOR);
 		assertTrue(evento5.anotarParticipante(socio9));
 		Socio socio10 = new Nadador("asd1", "123", "Juan", "Martinez", EstiloPreferido.CROLL, TipoUsuario.DEPORTISTA);
+		socio10.establecerDeportePrimario();
+		socio10.agregarDeporteQuePuedeRealizar(TipoDeDeportista.CICLISTA);
+		socio10.agregarDeporteQuePuedeRealizar(TipoDeDeportista.CORREDOR);
 		assertTrue(evento6.anotarParticipante(socio10));
 
 	}
@@ -68,6 +89,7 @@ public class Pruebas {
 	public void queSePuedaRemoverUnParticipanteIngresado() {
 		Evento evento1 = new Evento("Evento de prueba", TipoDeCompetencia.CICLISMO, 10, 150);
 		Socio socio1 = new Ciclista("asd", "123", "Juan", "Martinez", TipoDeBicicleta.RUTA, TipoUsuario.DEPORTISTA);
+		socio1.establecerDeportePrimario();
 		evento1.anotarParticipante(socio1);
 		assertTrue(evento1.removerParticipanteConNroSocio(socio1.getNroSocio()));
 	}
@@ -107,6 +129,10 @@ public class Pruebas {
 		Socio socio3 = new Nadador("asd3", "12345", "Sergio", "Gonzales", EstiloPreferido.MARIPOSA,
 				TipoUsuario.DEPORTISTA);
 		Socio socio4 = new Nadador("asd4", "123456", "Martin", "Juarez", EstiloPreferido.PECHO, TipoUsuario.DEPORTISTA);
+		socio1.establecerDeportePrimario();
+		socio2.establecerDeportePrimario();
+		socio3.establecerDeportePrimario();
+		socio4.establecerDeportePrimario();
 		assertTrue(evento1.anotarParticipante(socio1));
 		assertTrue(evento1.anotarParticipante(socio2));
 		assertTrue(evento1.anotarParticipante(socio3));
@@ -168,7 +194,8 @@ public class Pruebas {
     	compra1.agregarVeedor(publico1);
     	compra1.agregarVeedor(publico2);
     	compra1.ingresarEntrada(entrada1);
-    
+    	
+    	assertEquals(Boolean.TRUE, entrada1.getEsEnVenta());
     	assertTrue(compra1.realizarCompra(entrada1, publico1));
         assertEquals(Boolean.FALSE, entrada1.getEsEnVenta());
         assertEquals("Sanchez",compra1.buscarVeedor(publico1).getApellido());

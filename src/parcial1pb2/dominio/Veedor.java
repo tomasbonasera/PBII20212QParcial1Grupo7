@@ -9,7 +9,7 @@ public class Veedor extends Usuario {
 	
 	public Veedor(String usuario, String contrasena, Integer dni, String nombre, String apellido,
 			TipoUsuario tipoUsuario) {
-		super(usuario, contrasena, tipoUsuario,dni);
+		super(usuario, contrasena, tipoUsuario);
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;

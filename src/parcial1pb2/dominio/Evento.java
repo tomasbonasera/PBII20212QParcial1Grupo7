@@ -45,52 +45,45 @@ public class Evento {
 	}
 	
 	public Boolean esApto(Socio deportistaParticipante) {
-		switch(getTipoDeCompetencia()) {
+		Boolean socioApto=false;
+		switch(this.tipoDeCompetencia) {
 		case NATACION:
 			if(deportistaParticipante.getTipoDeportista()==TipoDeDeportista.NADADOR) {
-				return true;
-			}else {
-				return false;
+				socioApto=true;
 			}
+			break;
 		case RUNNING:
 			if(deportistaParticipante.getTipoDeportista()==TipoDeDeportista.CORREDOR) {
-				return true;
-			}else {
-				return false;
+				socioApto=true;
 			}
+			break;
 		case CICLISMO:
 			if(deportistaParticipante.getTipoDeportista()==TipoDeDeportista.CICLISTA) {
-				return true;
-			}else {
-				return false;
+				socioApto=true;
 			}
+			break;
 			
 		case ACUATLON:
 			if(deportistaParticipante.getTipoDeportista()==TipoDeDeportista.NADADOR || 
 			deportistaParticipante.getTipoDeportista()==TipoDeDeportista.CORREDOR) {
-				return true;
-			}else {
-				return false;
+				socioApto=true;
 			}
+			break;
 		case DUATLON:
 			if(deportistaParticipante.getTipoDeportista()==TipoDeDeportista.CICLISTA || 
 			deportistaParticipante.getTipoDeportista()==TipoDeDeportista.CORREDOR) {
-				return true;
-			}else {
-				return false;
+				socioApto=true;
 			}
+			break;
 		case TRIATLON:
 			if(deportistaParticipante.getTipoDeportista()==TipoDeDeportista.NADADOR || 
 			deportistaParticipante.getTipoDeportista()==TipoDeDeportista.CORREDOR || 
 			deportistaParticipante.getTipoDeportista()==TipoDeDeportista.CICLISTA) {
-				return true;
-			}else {
-				return false;
+				socioApto=true;
 			}
-			
-			
+			break;			
 		}
-		return false;
+		return socioApto;
 	}
 	
 	public Boolean anotarVeedor(Veedor personaAIngresar) {
@@ -165,8 +158,4 @@ public class Evento {
 		return tipoDeCompetencia;
 	}
 	
-	
-	
-	
-///////////////////////////////////////////////////	
 }

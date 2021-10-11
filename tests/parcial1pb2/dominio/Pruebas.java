@@ -144,5 +144,34 @@ public class Pruebas {
 		Socio socio1 = new Ciclista("asd", "123", "Juan", "Martinez", TipoDeBicicleta.RUTA, TipoUsuario.DEPORTISTA);
 		assertFalse(evento1.anotarParticipante(socio1));
 	}
-
+    @Test
+    public void queUnVeedorPuedaComprarUnaEntradaYMostrarTicket() {
+    	Veedor publico1 = new Veedor("asd1", "1", 12345678, "Pedro", "Sanchez", TipoUsuario.VEEDOR);
+    	Entrada entrada1= new Entrada(1,200.0,1);
+    	Compra compra1= new Compra();
+    	
+    	compra1.agregarVeedor(publico1);
+    	compra1.ingresarEntrada(entrada1);
+    
+    	assertTrue(compra1.realizarCompra(entrada1, publico1));
+    	assertEquals((Integer)1, compra1.getCantidadCompras());
+    	assertEquals("Pedro", compra1.buscarVeedor(publico1).getNombre());
+    	compra1.imprimirTicket();
+    }
+    @Test
+    public void queUnVeedorNoPuedaComprarUnaEntradaVendida() {
+    	Veedor publico1 = new Veedor("asd1", "1", 12345678, "Pedro", "Sanchez", TipoUsuario.VEEDOR);
+    	Veedor publico2 = new Veedor("asd2", "12", 1234567, "Juan", "Juarez", TipoUsuario.VEEDOR);
+    	Entrada entrada1= new Entrada(1,200.0,1);
+    	Compra compra1= new Compra();
+    	
+    	compra1.agregarVeedor(publico1);
+    	compra1.agregarVeedor(publico2);
+    	compra1.ingresarEntrada(entrada1);
+    
+    	assertTrue(compra1.realizarCompra(entrada1, publico1));
+        assertEquals(Boolean.FALSE, entrada1.getEsEnVenta());
+        assertEquals("Sanchez",compra1.buscarVeedor(publico1).getApellido());
+    	assertFalse(compra1.realizarCompra(entrada1, publico2));
+    }
 }

@@ -75,6 +75,19 @@ public class ClubDeEventosDeportivos {
 			Boolean verificar = usuarioAdministrador.verificarIngresoDeUsuario(usuarioIngresado, contraseniaIngresada);
 			if (verificar == true) {
 				System.out.println("se ha ingresado correctamente");
+				switch (usuarioAdministrador.buscarPorUsuarioYContrasena(usuarioIngresado, contraseniaIngresada).getTipo()) {
+				case ADMIN:
+					
+					break;
+				case VEEDOR:
+					
+					break;
+				case DEPORTISTA:
+					
+					break;
+				default:
+					break;
+				}
 			} else {
 				System.out.println("ha ocurrido un error");
 			}
@@ -91,6 +104,7 @@ public class ClubDeEventosDeportivos {
 		System.out.println("2. Corredor");
 		System.out.println("3. Ciclista");
 		Integer opcion3 = teclado.nextInt();
+		Boolean verificar;
 		switch (opcion3) {
 		case 1:
 			bucle3 = false;
@@ -108,15 +122,19 @@ public class ClubDeEventosDeportivos {
 			System.out.println("c. Peccho");
 			System.out.println("d. Mariposa");
 			Character dato1 = teclado.next().charAt(0);
-			Socio nuevoSocioNadador = new Nadador(usuario, contrasena, nombre, apellido, estilo(dato1),
-					TipoUsuario.DEPORTISTA);
-			Boolean verificar = usuarioAdministrador.agregarUsuarioRegistrado(nuevoSocioNadador);
-			if (verificar == true) {
-				System.out.println("se ha registrado correctamente");
+			if (usuarioAdministrador.verificarUsuarioRepetido(usuario)==false) {
+				Socio nuevoSocioNadador = new Nadador(usuario, contrasena, nombre, apellido, estilo(dato1),
+						TipoUsuario.DEPORTISTA);
+				verificar = usuarioAdministrador.agregarUsuarioRegistrado(nuevoSocioNadador);
+				if (verificar == true) {
+					System.out.println("se ha registrado correctamente");
+				} else {
+					System.out.println("ha ocurrido un error");
+				}
+				break;
 			} else {
-				System.out.println("ha ocurrido un error");
+				System.out.println("Usuario ya registrado. Use otro usuario para registrarse");
 			}
-			break;
 		case 2:
 			System.out.println("\nIngrese su nombre:");
 			nombre = teclado.next();
@@ -131,16 +149,22 @@ public class ClubDeEventosDeportivos {
 			System.out.println("b. 10 KM");
 			System.out.println("c. 42 KM");
 			Character dato2 = teclado.next().charAt(0);
-			Socio nuevoSocioCorredor = new Corredor(usuario, contrasena, nombre, apellido, distancia(dato2),
-					TipoUsuario.DEPORTISTA);
-			verificar = usuarioAdministrador.agregarUsuarioRegistrado(nuevoSocioCorredor);
-			if (verificar == true) {
-				System.out.println("se ha registrado correctamente");
+
+			if (usuarioAdministrador.verificarUsuarioRepetido(usuario)==false) {
+				Socio nuevoSocioCorredor = new Corredor(usuario, contrasena, nombre, apellido, distancia(dato2),
+						TipoUsuario.DEPORTISTA);
+				verificar = usuarioAdministrador.agregarUsuarioRegistrado(nuevoSocioCorredor);
+				if (verificar == true) {
+					System.out.println("se ha registrado correctamente");
+				} else {
+					System.out.println("ha ocurrido un error");
+				}
+				bucle3 = false;
+				break;
 			} else {
-				System.out.println("ha ocurrido un error");
+				System.out.println("Usuario ya registrado. Use otro usuario para registrarse");
 			}
-			bucle3 = false;
-			break;
+
 		case 3:
 			bucle3 = false;
 			System.out.println("\nIngrese su nombre:");
@@ -156,14 +180,19 @@ public class ClubDeEventosDeportivos {
 			System.out.println("b. Ruta");
 			System.out.println("c. Triatlon");
 			Character dato3 = teclado.next().charAt(0);
-			Socio nuevoSocioCiclista = new Ciclista(usuario, contrasena, nombre, apellido, tipoBicicleta(dato3),
-					TipoUsuario.DEPORTISTA);
-			verificar = usuarioAdministrador.agregarUsuarioRegistrado(nuevoSocioCiclista);
-			if (verificar == true) {
-				System.out.println("se ha registrado correctamente");
+			if (usuarioAdministrador.verificarUsuarioRepetido(usuario)==false) {
+				Socio nuevoSocioCiclista = new Ciclista(usuario, contrasena, nombre, apellido, tipoBicicleta(dato3),
+						TipoUsuario.DEPORTISTA);
+				verificar = usuarioAdministrador.agregarUsuarioRegistrado(nuevoSocioCiclista);
+				if (verificar == true) {
+					System.out.println("se ha registrado correctamente");
+				} else {
+					System.out.println("ha ocurrido un error");
+				}
 			} else {
-				System.out.println("ha ocurrido un error");
+				System.out.println("Usuario ya registrado. Use otro usuario para registrarse");
 			}
+
 			break;
 		default:
 			System.out.println("opcion incorrecta\\n");
@@ -237,13 +266,18 @@ public class ClubDeEventosDeportivos {
 		String usuario = teclado.next();
 		System.out.println("Ingrese una contraseña:");
 		String contraseña = teclado.next();
-		Veedor nuevoVeedor = new Veedor(usuario, contraseña, dni, nombre, apellido, TipoUsuario.VEEDOR);
-		Boolean verificar = usuarioAdministrador.agregarUsuarioRegistrado(nuevoVeedor);
-		if (verificar == true) {
-			System.out.println("se ha registrado correctamente");
+		if (usuarioAdministrador.verificarUsuarioRepetido(usuario)==false) {
+			Veedor nuevoVeedor = new Veedor(usuario, contraseña, dni, nombre, apellido, TipoUsuario.VEEDOR);
+			Boolean verificar = usuarioAdministrador.agregarUsuarioRegistrado(nuevoVeedor);
+			if (verificar == true) {
+				System.out.println("se ha registrado correctamente");
+			} else {
+				System.out.println("ha ocurrido un error");
+			}
 		} else {
-			System.out.println("ha ocurrido un error");
+			System.out.println("Usuario ya registrado. Use otro usuario para registrarse");
 		}
+		
 
 	}
 

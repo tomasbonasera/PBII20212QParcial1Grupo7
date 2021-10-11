@@ -8,7 +8,7 @@ public class Socio extends Usuario {
 	private static Integer cantidadSocios = 0;
 
 	public Socio(String usuario, String contrasena, String nombre, String apellido, TipoUsuario tipoUsuario) {
-		super(usuario, contrasena, nombre, apellido, tipoUsuario);
+		super(usuario, contrasena, tipoUsuario);
 		this.nombre = nombre;
 		this.apellido = apellido;
 		setTipo(TipoUsuario.DEPORTISTA);

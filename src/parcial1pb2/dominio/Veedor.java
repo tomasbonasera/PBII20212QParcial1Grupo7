@@ -5,8 +5,7 @@ public class Veedor extends Usuario {
 	private Integer dni;
 	private String nombre;
 	private String apellido;
-	private Integer nroEntrada;
-
+	
 	public Veedor(String usuario, String contrasena, Integer dni, String nombre, String apellido,
 			TipoUsuario tipoUsuario) {
 		super(usuario, contrasena, tipoUsuario);
@@ -16,14 +15,6 @@ public class Veedor extends Usuario {
 		setUsuario(usuario);
 		setContrasena(contrasena);
 
-	}
-
-	public Integer getNroEntrada() {
-		return nroEntrada;
-	}
-
-	public void setNroEntrada(Integer nroEntrada) {
-		this.nroEntrada = nroEntrada;
 	}
 
 	public Integer getDni() {
@@ -37,15 +28,12 @@ public class Veedor extends Usuario {
 	public String getApellido() {
 		return apellido;
 	}
-
-	// Cuando el DNI y el nro de entrada son iguales significa que es la misma
-	// persona
+	// Cuando el dni es el mismo significa que es la misma persona
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((dni == null) ? 0 : dni.hashCode());
-		result = prime * result + ((nroEntrada == null) ? 0 : nroEntrada.hashCode());
 		return result;
 	}
 
@@ -63,12 +51,7 @@ public class Veedor extends Usuario {
 				return false;
 		} else if (!dni.equals(other.dni))
 			return false;
-		if (nroEntrada == null) {
-			if (other.nroEntrada != null)
-				return false;
-		} else if (!nroEntrada.equals(other.nroEntrada))
-			return false;
 		return true;
-	}
+	}	
 
 }

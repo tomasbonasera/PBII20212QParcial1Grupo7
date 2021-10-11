@@ -63,7 +63,7 @@ public class ClubDeEventosDeportivos {
 			String usuarioIngresado = teclado.next();
 			System.out.println("Ingrese contraseña:");
 			String contraseniaIngresada = teclado.next();
-			Boolean verificar = usuarioAdministrador.verificarIngresoDeUsuario(usuarioIngresado, contraseniaIngresada);
+			Boolean verificar = usuarioAdministrador.verificarIngresoDeUsuario(usuarioIngresado, contraseniaIngresada);			
 			if (verificar == true) {
 				System.out.println("se ha ingresado correctamente");
 				switch (usuarioAdministrador.buscarPorUsuarioYContrasena(usuarioIngresado, contraseniaIngresada).getTipo()) {
@@ -71,7 +71,7 @@ public class ClubDeEventosDeportivos {
 					inMenuAdmin();
 					break;
 				case VEEDOR:
-					
+					inMenuVeedor(usuarioIngresado, contraseniaIngresada);
 					break;
 				case DEPORTISTA:
 					
@@ -88,6 +88,7 @@ public class ClubDeEventosDeportivos {
 			break;
 		}
 	}
+
 
 	public static void menuDeportista1() {
 		System.out.println("Registrarse como...");
@@ -547,4 +548,51 @@ public class ClubDeEventosDeportivos {
 
 		return eleccion;
 	}
+	
+    public static void inMenuVeedor(String usuarioIngresado, String contraseniaIngresada) {
+		Integer opcion=0;
+		do {
+			System.out.println("(1) Comprar entrada");
+			System.out.println("(2) Salir");
+			opcion =teclado.nextInt();
+			switch(opcion) {
+			case 1:
+				comprarEntrada(usuarioIngresado,contraseniaIngresada);
+				break;
+		
+			default:
+				System.out.println("Opcion invalida");
+			}
+		}while(opcion!=2);
+	}
+
+	
+
+	public static void comprarEntrada(String usuarioIngresado,String contraseniaIngresada ) {
+		System.out.println("\nIngrese numero de la entrada:");
+		Integer numero = teclado.nextInt();
+		System.out.println("\nIngrese precio de la entrada:");
+		Double precio = teclado.nextDouble();
+		System.out.println("\nIngrese cantidad de entradas:");
+		Integer cantidad = teclado.nextInt();
+		
+	    Entrada entrada = new Entrada(numero,precio,cantidad);		
+		Usuario buscado=usuarioAdministrador.buscarPorUsuarioYContrasena(usuarioIngresado, contraseniaIngresada);
+		String usuario =((Veedor)buscado).getUsuario(); 
+		String contraseña = ((Veedor)buscado).getContrasena();
+		Integer dni = ((Veedor)buscado).getDni();
+		String nombre =((Veedor)buscado).getNombre();
+		String apellido=((Veedor)buscado).getApellido();
+		TipoUsuario tipoUsuario=((Veedor)buscado).getTipo();
+		Veedor comprador = new Veedor(usuario, contraseña, dni, nombre, apellido, tipoUsuario);
+		Compra compra= new Compra();
+		compra.agregarVeedor(comprador);
+		compra.ingresarEntrada(entrada);
+		if(compra.realizarCompra(entrada, comprador)) {
+			System.out.println("Se ha realizado la compra");
+		}else {
+			System.out.println("No se ha podido realizar la compra");
+		}
+	}
+
 }

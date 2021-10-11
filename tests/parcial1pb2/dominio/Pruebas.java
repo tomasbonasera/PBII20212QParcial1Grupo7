@@ -168,7 +168,8 @@ public class Pruebas {
     	compra1.agregarVeedor(publico1);
     	compra1.agregarVeedor(publico2);
     	compra1.ingresarEntrada(entrada1);
-    
+    	
+    	assertEquals(Boolean.TRUE, entrada1.getEsEnVenta());
     	assertTrue(compra1.realizarCompra(entrada1, publico1));
         assertEquals(Boolean.FALSE, entrada1.getEsEnVenta());
         assertEquals("Sanchez",compra1.buscarVeedor(publico1).getApellido());

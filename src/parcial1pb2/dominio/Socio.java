@@ -1,15 +1,18 @@
 package parcial1pb2.dominio;
 
-public abstract class Socio {
+public class Socio extends Usuario {
 	private Integer nroSocio;
 	private String nombre;
 	private String apellido;
 	private TipoDeDeportista tipoDeDeportista;
+	private static Integer cantidadSocios = 0;
 
-	public Socio(Integer nroSocio, String nombre, String apellido) {
-		this.nroSocio = nroSocio;
+	public Socio(String usuario, String contrasena, String nombre, String apellido, TipoUsuario tipoUsuario) {
+		super(usuario, contrasena, nombre, apellido, tipoUsuario);
 		this.nombre = nombre;
 		this.apellido = apellido;
+		setTipo(TipoUsuario.DEPORTISTA);
+		this.nroSocio = cantidadSocios++;
 	}
 
 	public Integer getNroSocio() {
@@ -70,5 +73,3 @@ public abstract class Socio {
 		return tipoDeDeportista;
 	}
 }
-
-

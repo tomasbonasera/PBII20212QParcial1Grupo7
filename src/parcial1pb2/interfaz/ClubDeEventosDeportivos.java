@@ -1,6 +1,8 @@
 package parcial1pb2.interfaz;
 
+import java.util.Iterator;
 import java.util.Scanner;
+
 
 import parcial1pb2.dominio.*;
 
@@ -13,8 +15,8 @@ public class ClubDeEventosDeportivos {
 	public static Boolean bucle3 = true;
 
 	public static void main(String[] args) {
+		
 
-		System.out.println("Bienvenidos al Club\n");
 
 		do {
 			primerMenu();
@@ -74,7 +76,8 @@ public class ClubDeEventosDeportivos {
 					
 					break;
 				case DEPORTISTA:
-					
+					inMenuDeportista(usuarioIngresado, contraseniaIngresada);
+
 					break;
 				default:
 					break;
@@ -86,6 +89,106 @@ public class ClubDeEventosDeportivos {
 		default:
 			System.out.println("opcion incorrecta\n");
 			break;
+		}
+	}
+//-----------------------------DEPORTISTA--------------------------------------
+	private static void inMenuDeportista(String usuario, String contrasena) {
+		Socio usuarioLogeado=(Socio) usuarioAdministrador.buscarPorUsuarioYContrasena(usuario, contrasena);
+		Integer opcion=0;
+		do {
+			System.out.println("*************************************************");
+			System.out.println("(1) Ver eventos");
+			System.out.println("(2) Registrarse a un evento");
+			System.out.println("(3) Ver mi información");
+			System.out.println("(4) Agregar tipo de deporte");
+			System.out.println("(5) Desloguear");
+			System.out.println("*************************************************\n");
+			opcion = teclado.nextInt();
+			switch (opcion) {
+			case 1:	
+				verListaEventos();
+				break;
+			case 2:
+				registrarseEnUnEvento(usuarioLogeado);
+				break;
+			case 3:
+				verMiInformacion(usuarioLogeado);
+				break;
+			case 4:
+				agregarNuevoDeporte(usuarioLogeado);
+				break;
+			case 5:
+				break;
+			default:
+				System.out.println("Opción inválida");
+				break;
+			}
+		} while (opcion!=5);
+	}
+
+private static void agregarNuevoDeporte(Socio usuarioLogeado) {
+	System.out.println("Se agregará...");
+	System.out.println("1. Nadador");
+	System.out.println("2. Corredor");
+	System.out.println("3. Ciclista");
+	Integer opcionAgregar = teclado.nextInt();
+	Boolean sePudoAgregarDeporte=false;
+	switch (opcionAgregar) {
+	case 1:
+		sePudoAgregarDeporte=usuarioLogeado.agregarDeporteQuePuedeRealizar(TipoDeDeportista.NADADOR);
+		if (sePudoAgregarDeporte) {
+			System.out.println("Se ha agregado un nuevo tipo de deporte correctamente");
+		} else {
+			System.out.println("No se ha podido agregar un nuevo tipo de deporte");
+		}
+			
+		break;
+	case 2:
+		sePudoAgregarDeporte=usuarioLogeado.agregarDeporteQuePuedeRealizar(TipoDeDeportista.CORREDOR);
+		if (sePudoAgregarDeporte) {
+			System.out.println("Se ha agregado un nuevo tipo de deporte correctamente");
+		} else {
+			System.out.println("No se ha podido agregar un nuevo tipo de deporte");
+		}
+		break;
+	case 3:
+		sePudoAgregarDeporte=usuarioLogeado.agregarDeporteQuePuedeRealizar(TipoDeDeportista.CICLISTA);
+		if (sePudoAgregarDeporte) {
+			System.out.println("Se ha agregado un nuevo tipo de deporte correctamente");
+		} else {
+			System.out.println("No se ha podido agregar un nuevo tipo de deporte");
+		}
+		break;
+	default:
+		System.out.println("Opción inválida");
+		break;
+	}
+}
+
+	private static void verMiInformacion(Socio usuarioLogeado) {
+		System.out.println("Información:");
+		System.out.println(usuarioLogeado.toString());
+		TipoDeDeportista[] temp=usuarioLogeado.getDeportesQuePuedeRealizar();
+		System.out.println("Puede entrar a eventos que tengan como requisito los siguientes tipos de deportista:");
+		for (int i = 0; i < temp.length; i++) {
+			if (temp!=null) {
+			System.out.println(" * "+temp[i]);	
+			}
+		}
+	}
+
+	private static void registrarseEnUnEvento(Socio usuarioLogeado) {
+		System.out.println("Ingrese el código del evento al cual desea registrarse");
+		Integer codigo=teclado.nextInt();
+		if (usuarioAdministrador.buscarEventoPorCodigo(codigo)!=null && usuarioAdministrador.buscarEventoPorCodigo(codigo).esApto(usuarioLogeado)) {
+			Boolean sePudoAgregar=usuarioAdministrador.buscarEventoPorCodigo(codigo).anotarParticipante(usuarioLogeado);
+			if (sePudoAgregar) {
+				System.out.println("Se ha registrado exitosamente en el evento");
+			}else {
+				System.out.println("No se ha podido registrar en el evento ingresado");
+			}
+		}else {
+			System.out.println("No se ha podido registrar al evento ingresado. Compruebe el código del evento y si cumple con los requisistos");
 		}
 	}
 
@@ -116,6 +219,7 @@ public class ClubDeEventosDeportivos {
 			if (usuarioAdministrador.verificarUsuarioRepetido(usuario)==false) {
 				Socio nuevoSocioNadador = new Nadador(usuario, contrasena, nombre, apellido, estilo(dato1),
 						TipoUsuario.DEPORTISTA);
+				nuevoSocioNadador.establecerDeportePrimario();
 				verificar = usuarioAdministrador.agregarUsuarioRegistrado(nuevoSocioNadador);
 				if (verificar == true) {
 					System.out.println("se ha registrado correctamente");
@@ -144,6 +248,7 @@ public class ClubDeEventosDeportivos {
 			if (usuarioAdministrador.verificarUsuarioRepetido(usuario)==false) {
 				Socio nuevoSocioCorredor = new Corredor(usuario, contrasena, nombre, apellido, distancia(dato2),
 						TipoUsuario.DEPORTISTA);
+				nuevoSocioCorredor.establecerDeportePrimario();
 				verificar = usuarioAdministrador.agregarUsuarioRegistrado(nuevoSocioCorredor);
 				if (verificar == true) {
 					System.out.println("se ha registrado correctamente");
@@ -174,6 +279,7 @@ public class ClubDeEventosDeportivos {
 			if (usuarioAdministrador.verificarUsuarioRepetido(usuario)==false) {
 				Socio nuevoSocioCiclista = new Ciclista(usuario, contrasena, nombre, apellido, tipoBicicleta(dato3),
 						TipoUsuario.DEPORTISTA);
+				nuevoSocioCiclista.establecerDeportePrimario();
 				verificar = usuarioAdministrador.agregarUsuarioRegistrado(nuevoSocioCiclista);
 				if (verificar == true) {
 					System.out.println("se ha registrado correctamente");
@@ -255,7 +361,7 @@ public class ClubDeEventosDeportivos {
 
 		return eleccion;
 	}
-
+//--------------------------------------------------------------------------------------
 	public static void menuVeedor() {
 		System.out.println("\nIngrese su nombre:");
 		String nombre = teclado.next();
@@ -415,7 +521,7 @@ public class ClubDeEventosDeportivos {
 					hayPublico=true;
 				}
 			}
-			if (hayPublico) {
+			if (hayPublico=false) {
 				System.out.println("No se encontraron veedores en el evento ingresado");
 			}
 		} else {
@@ -436,7 +542,7 @@ public class ClubDeEventosDeportivos {
 					hayParticipantes=true;
 				}
 			}
-			if (hayParticipantes) {
+			if (hayParticipantes=false) {
 				System.out.println("No se encontraron veedores en el evento ingresado");
 			}
 		} else {
@@ -448,9 +554,14 @@ public class ClubDeEventosDeportivos {
 		if (usuarioAdministrador.obtenerCantidadDeEventosExistentes().equals(0)) {
 			System.out.println("No se encontraron eventos creados");
 		} else {
+			Boolean hayEventos=false;
 			Evento[] listaEventos=usuarioAdministrador.obtenerListaDeEventosExistentes();
 			for (int i = 0; i < listaEventos.length; i++) {
 				System.out.println(listaEventos[i].toString());
+				hayEventos=true;
+			}
+			if (hayEventos=false) {
+				System.out.println("No se encontraron eventos");
 			}
 		}
 	}

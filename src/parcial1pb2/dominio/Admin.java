@@ -15,11 +15,11 @@ public class Admin {
 		this.eventos = new Evento[100];
 		this.usuarios = new Usuario[1000];
 		this.usuarios[0] = new Usuario(usuarioAdminDefault, contrasenaAdminDefault, TipoUsuario.ADMIN);
+
 	}
 
 	public Boolean agregarUsuarioRegistrado(Usuario usuarioRegistrado) {
 		Boolean verificar = false;
-
 		for (int i = 0; i < usuarios.length; i++) {
 			if (this.usuarios[i] == null) {
 				this.usuarios[i] = usuarioRegistrado;
@@ -131,5 +131,4 @@ public class Admin {
 		}
 		return eventoBuscado;
 	}
-
 }

@@ -7,10 +7,12 @@ public class Usuario {
 	private String contrasena;
 	private TipoUsuario tipo;
 
+
 	public Usuario(String usuario, String contrasena, TipoUsuario tipoUsuario) {
 		this.usuario = usuario;
 		this.contrasena = contrasena;
-		this.tipo = tipoUsuario;
+		this.tipo=tipoUsuario;
+
 	}
 
 	public String getUsuario() {
@@ -36,5 +38,7 @@ public class Usuario {
 	public void setTipo(TipoUsuario tipo) {
 		this.tipo = tipo;
 	}
+
+
 
 }

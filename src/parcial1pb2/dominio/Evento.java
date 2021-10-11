@@ -54,37 +54,37 @@ public class Evento {
 		Boolean socioApto=false;
 		switch(this.tipoDeCompetencia) {
 		case NATACION:
-			if(deportistaParticipante.getTipoDeportista()==TipoDeDeportista.NADADOR) {
+			if(deportistaParticipante.puedeRealizarDeterminadoDeporte(TipoDeDeportista.NADADOR)) {
 				socioApto=true;
 			}
 			break;
 		case RUNNING:
-			if(deportistaParticipante.getTipoDeportista()==TipoDeDeportista.CORREDOR) {
+			if(deportistaParticipante.puedeRealizarDeterminadoDeporte(TipoDeDeportista.CORREDOR)) {
 				socioApto=true;
 			}
 			break;
 		case CICLISMO:
-			if(deportistaParticipante.getTipoDeportista()==TipoDeDeportista.CICLISTA) {
+			if(deportistaParticipante.puedeRealizarDeterminadoDeporte(TipoDeDeportista.CICLISTA)) {
 				socioApto=true;
 			}
 			break;
 			
 		case ACUATLON:
-			if(deportistaParticipante.getTipoDeportista()==TipoDeDeportista.NADADOR || 
-			deportistaParticipante.getTipoDeportista()==TipoDeDeportista.CORREDOR) {
+			if(deportistaParticipante.puedeRealizarDeterminadoDeporte(TipoDeDeportista.NADADOR) && 
+			deportistaParticipante.puedeRealizarDeterminadoDeporte(TipoDeDeportista.CORREDOR)) {
 				socioApto=true;
 			}
 			break;
 		case DUATLON:
-			if(deportistaParticipante.getTipoDeportista()==TipoDeDeportista.CICLISTA || 
-			deportistaParticipante.getTipoDeportista()==TipoDeDeportista.CORREDOR) {
+			if(deportistaParticipante.puedeRealizarDeterminadoDeporte(TipoDeDeportista.CICLISTA) && 
+			deportistaParticipante.puedeRealizarDeterminadoDeporte(TipoDeDeportista.CORREDOR)) {
 				socioApto=true;
 			}
 			break;
 		case TRIATLON:
-			if(deportistaParticipante.getTipoDeportista()==TipoDeDeportista.NADADOR || 
-			deportistaParticipante.getTipoDeportista()==TipoDeDeportista.CORREDOR || 
-			deportistaParticipante.getTipoDeportista()==TipoDeDeportista.CICLISTA) {
+			if(deportistaParticipante.puedeRealizarDeterminadoDeporte(TipoDeDeportista.NADADOR) && 
+			deportistaParticipante.puedeRealizarDeterminadoDeporte(TipoDeDeportista.CORREDOR) &&
+			deportistaParticipante.puedeRealizarDeterminadoDeporte(TipoDeDeportista.CICLISTA)) {
 				socioApto=true;
 			}
 			break;			

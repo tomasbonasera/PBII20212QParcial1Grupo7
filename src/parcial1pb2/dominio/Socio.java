@@ -72,4 +72,11 @@ public class Socio extends Usuario {
 	public TipoDeDeportista getTipoDeportista() {
 		return tipoDeDeportista;
 	}
+
+	@Override
+	public String toString() {
+		return "Numero de Socio=" + nroSocio + ", Nombre=" + nombre + ", Apellido=" + apellido + ", Tipo De Deportista="
+				+ tipoDeDeportista + "]";
+	}
+	
 }

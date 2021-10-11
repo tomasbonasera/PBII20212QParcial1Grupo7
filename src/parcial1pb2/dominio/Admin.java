@@ -1,5 +1,7 @@
 package parcial1pb2.dominio;
 
+import java.util.Iterator;
+
 public class Admin {
 
 	private String usuarioAdminDefault;
@@ -69,7 +71,65 @@ public class Admin {
 		}
 		return usuarioBuscado;
 	}
+	public boolean agregarEvento(Evento eventoAAgregar) {
+		Boolean rt=false;
+		if (eventoAAgregar!=null) {
+			for (int i = 0; i < eventos.length; i++) {
+				if (eventos[i]==null) {
+					eventos[i]=eventoAAgregar;
+					rt=true;
+					break;
+				}
+			}
+		}
+		return rt;
+	}
+	public Integer obtenerCantidadDeEventosExistentes() {
+		Integer cantidad=0;
+		for (int i = 0; i < eventos.length; i++) {
+			if (eventos[i]!=null) {
+				cantidad++;
+			}
+		}
+		return cantidad;
+	}
+	public Evento[] obtenerListaDeEventosExistentes() {
+		Evento[] eventosExistentes=new Evento[obtenerCantidadDeEventosExistentes()];
+		int posicionEvento=0;
+		for (int i = 0; i < eventos.length; i++) {
+			if (eventos[i]!=null) {
+				eventosExistentes[posicionEvento]=eventos[i];
+				posicionEvento++;
+			}
+		}
+		return eventosExistentes;
+	}
+	public Boolean eliminarEvento(Integer codigo) {
+		Boolean rt=false;
+		for (int i = 0; i < eventos.length; i++) {
+			if (eventos[i]!=null) {
+				if (eventos[i].getIdentificador().equals(codigo)) {
+					eventos[i]=null;
+					rt=true;
+					break;
+				}
+			}
 
+		}
+		return rt;
+	}
+	public Evento buscarEventoPorCodigo(Integer codigo) {
+		Evento eventoBuscado=null;
+		for (int i = 0; i < eventos.length; i++) {
+			if (eventos[i]!=null) {
+				if (eventos[i].getIdentificador().equals(codigo)) {
+					eventoBuscado=eventos[i];
+					break;
+				}
+			}
 
+		}
+		return eventoBuscado;
+	}
 
 }

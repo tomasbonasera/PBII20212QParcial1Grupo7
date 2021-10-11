@@ -69,7 +69,7 @@ public class Pruebas {
 		Evento evento1 = new Evento("Evento de prueba", TipoDeCompetencia.CICLISMO, 10, 150);
 		Socio socio1 = new Ciclista("asd", "123", "Juan", "Martinez", TipoDeBicicleta.RUTA, TipoUsuario.DEPORTISTA);
 		evento1.anotarParticipante(socio1);
-		assertTrue(evento1.removerParticipante(socio1));
+		assertTrue(evento1.removerParticipanteConNroSocio(socio1.getNroSocio()));
 	}
 
 	@Test
@@ -85,7 +85,7 @@ public class Pruebas {
 		Evento evento1 = new Evento("Evento de prueba", TipoDeCompetencia.CICLISMO, 10, 150);
 		Veedor publico1 = new Veedor("asd", "123", 12345678, "Pedro", "Fernandez", TipoUsuario.VEEDOR);
 		evento1.anotarVeedor(publico1);
-		assertTrue(evento1.removerVeedor(publico1));
+		assertTrue(evento1.removerVeedorConDni(publico1.getDni()));
 	}
 
 	@Test

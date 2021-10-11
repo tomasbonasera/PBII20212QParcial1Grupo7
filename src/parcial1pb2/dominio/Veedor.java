@@ -5,6 +5,7 @@ public class Veedor extends Usuario {
 	private Integer dni;
 	private String nombre;
 	private String apellido;
+
 	
 	public Veedor(String usuario, String contrasena, Integer dni, String nombre, String apellido,
 			TipoUsuario tipoUsuario) {
@@ -28,6 +29,8 @@ public class Veedor extends Usuario {
 	public String getApellido() {
 		return apellido;
 	}
+
+
 	// Cuando el dni es el mismo significa que es la misma persona
 	@Override
 	public int hashCode() {

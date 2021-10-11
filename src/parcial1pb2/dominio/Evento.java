@@ -5,12 +5,15 @@ public class Evento {
 	private Socio [] participantes;
 	private Veedor [] publico;
 	private TipoDeCompetencia tipoDeCompetencia;
+	private static Integer cantidadDeEventos=0;
+	private Integer identificador;
 
 	public Evento(String nombre, TipoDeCompetencia tipo, Integer cantidadDeParticipantes, Integer publicoHabilitado) {
 		this.nombre = nombre;
 		this.tipoDeCompetencia = tipo;
 		participantes = new Socio [cantidadDeParticipantes];
 		publico = new Veedor [publicoHabilitado];
+		this.identificador=cantidadDeEventos++;
 	}
 	
 	
@@ -33,14 +36,17 @@ public class Evento {
 		return rt;
 	}
 	
-	public Boolean removerParticipante(Socio deportistaParticipante) {
+	public Boolean removerParticipanteConNroSocio(Integer nroSocio) {
 		Boolean rt=false;
 		for(int i=0; i<participantes.length; i++) {
-			if(participantes[i].getNroSocio().equals(deportistaParticipante.getNroSocio())) {
-				participantes[i]=null;
-				rt=true;
-				break;
+			if (participantes[i]!=null) {
+				if(participantes[i].getNroSocio().equals(nroSocio)) {
+					participantes[i]=null;
+					rt=true;
+					break;
+				}	
 			}
+			
 		}return rt;
 	}
 	
@@ -88,7 +94,7 @@ public class Evento {
 	
 	public Boolean anotarVeedor(Veedor personaAIngresar) {
 		Boolean rt=false;
-		if(buscarVeedor(personaAIngresar)==null) {
+		if(buscarVeedorConDni(personaAIngresar.getDni())==null) {
 			for(int i=0; i<publico.length; i++) {
 				if(publico[i]==null) {
 					publico[i]=personaAIngresar;
@@ -100,14 +106,19 @@ public class Evento {
 		return rt;
 	}
 	
-	public Boolean removerVeedor (Veedor personaARetirar) {
+	public Boolean removerVeedorConDni (Integer dni) {
+		Boolean rt=false;
 		for(int i=0; i<publico.length; i++) {
-			if(publico[i].getDni().equals(personaARetirar.getDni())) {
-				publico[i]=null;
-				return true;
+			if (publico[i]!=null) {
+				if(publico[i].getDni().equals(dni)) {
+					publico[i]=null;
+					rt=true;
+					break;
+				}	
 			}
+			
 		}
-		return false;
+		return rt;
 	}
 
 	public Socio buscarParticipantePorNumeroDeSocio(Integer nmroSocioABuscar) {
@@ -122,17 +133,34 @@ public class Evento {
 		}return participanteEncontrado;
 	}
 	
-	public Veedor buscarVeedor(Veedor veedorABuscar) {
+	public Veedor buscarVeedorConDni(Integer dni) {
 		Veedor veedorencontrado=null;
 		for(int i=0; i<publico.length; i++) {
 			if(publico[i]!=null) {
-				if(publico[i].getDni().equals(veedorABuscar.getDni())) {
+				if(publico[i].getDni().equals(dni)) {
 					veedorencontrado=publico[i];
 					break;
 				}
 			}
 		}return veedorencontrado;
 	}
+
+	
+	
+	public void setParticipantes(Socio[] participantes) {
+		this.participantes = participantes;
+	}
+
+
+	public void setPublico(Veedor[] publico) {
+		this.publico = publico;
+	}
+
+
+	public void setTipoDeCompetencia(TipoDeCompetencia tipoDeCompetencia) {
+		this.tipoDeCompetencia = tipoDeCompetencia;
+	}
+
 
 	public String getNombre() {
 		return nombre;
@@ -156,6 +184,22 @@ public class Evento {
 
 	public TipoDeCompetencia getTipoDeCompetencia() {
 		return tipoDeCompetencia;
+	}
+
+
+	public Integer getIdentificador() {
+		return identificador;
+	}
+
+
+	public void setIdentificador(Integer identificador) {
+		this.identificador = identificador;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Código=" + identificador + ", Tipo De Competencia=" + tipoDeCompetencia + ", Nombre="+ nombre;
 	}
 	
 }

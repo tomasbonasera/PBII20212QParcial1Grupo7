@@ -2,17 +2,17 @@ package parcial1pb2.dominio;
 
 public class Admin {
 
-	private String usuario;
-	private String contrasena;
+	private String usuarioAdminDefault;
+	private String contrasenaAdminDefault;
 	private Evento[] eventos;
 	private Usuario[] usuarios;
 
 	public Admin() {
-		this.usuario = usuario;
-		this.contrasena = contrasena;
-		this.eventos = new Evento[10];
+		this.usuarioAdminDefault = "admin";
+		this.contrasenaAdminDefault = "2468";
+		this.eventos = new Evento[100];
 		this.usuarios = new Usuario[1000];
-		this.usuarios[0] = new Usuario("pepito", "perez", "admin", "2468", TipoUsuario.ADMIN);
+		this.usuarios[0] = new Usuario(usuarioAdminDefault, contrasenaAdminDefault, TipoUsuario.ADMIN);
 	}
 
 	public Boolean agregarUsuarioRegistrado(Usuario usuarioRegistrado) {
@@ -22,6 +22,7 @@ public class Admin {
 			if (this.usuarios[i] == null) {
 				this.usuarios[i] = usuarioRegistrado;
 				verificar = true;
+				break;
 			}
 		}
 		return verificar;
@@ -32,12 +33,43 @@ public class Admin {
 
 		for (int i = 0; i < usuarios.length; i++) {
 			if (this.usuarios[i] != null) {
-				if (this.usuarios[i].getUsuario() == usuario && this.usuarios[i].getContrasena() == contrasena) {
+				if (this.usuarios[i].getUsuario().equals(usuario) && this.usuarios[i].getContrasena().equals(contrasena)) {
 					verificar = true;
+					break;
 				}
 			}
 		}
 		return verificar;
 	}
+	public Boolean verificarUsuarioRepetido(String usuario) {
+		Boolean rt=false;
+		for (int i = 0; i < usuarios.length; i++) {
+			if (usuarios[i]!=null) {
+				if (usuarios[i].getUsuario().equals(usuario) || usuario.equals(usuarioAdminDefault)) {
+					rt=true;
+					break;
+				}
+			}
+		}
+		return rt;
+	}
+	public Usuario buscarPorUsuarioYContrasena(String usuario, String contrasena) {
+		Usuario usuarioBuscado=null;
+		if (usuarioAdminDefault.equals(usuario) && contrasenaAdminDefault.equals(contrasena)) {
+			usuarioBuscado=usuarios[0];
+		} else {
+			for (int i = 0; i < usuarios.length; i++) {
+				if (this.usuarios[i] != null) {
+					if (this.usuarios[i].getUsuario().equals(usuario) && this.usuarios[i].getContrasena().equals(contrasena)) {
+						usuarioBuscado=usuarios[i];
+						break;
+					}
+				}
+			}
+		}
+		return usuarioBuscado;
+	}
+
+
 
 }
